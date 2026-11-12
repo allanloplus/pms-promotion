@@ -4,403 +4,357 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>米數資科｜以ISMS為基礎的專案安全管理系統</title>
-<meta name="description" content="把資安要求做進專案的每一個階段：專案分類、五階段管控、安全重要性評估、風險評鑑與安全要求事項，一套系統完成。對應 ISO 27001、TISAX、ISO 27701、ISO 42001、IEC 62443、ISO/SAE 21434 之專案安全要求。">
-<meta name="theme-color" content="#0b3446">
+<meta name="description" content="專案一立案，資安要求自動到位。依專案性質、類別與委外型態，自動帶出階段管控、風險評鑑與安全要求事項，並以階段審查把關。對應 ISO 27001、TISAX、ISO 27701、ISO 42001、IEC 62443、ISO/SAE 21434 之專案安全要求。">
+<meta name="theme-color" content="#050a13">
 <meta property="og:title" content="米數資科｜以ISMS為基礎的專案安全管理系統">
-<meta property="og:description" content="把資安要求做進專案的每一個階段。">
+<meta property="og:description" content="專案一立案，資安要求自動到位。">
 <meta property="og:image" content="img/dashboard.jpg">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <style>
 :root {
-  --ink: #0b2230; --ink2: #4a5f6d; --ink3: #7d8e99; --bg: #f5f8fa; --card: #fff; --line: #dde6ec;
-  --pri: #0f5c7a; --pri-d: #0b3446; --pri-l: #e4f1f6; --cyan: #7fd0e6; --amber: #e0a030; --red: #c0392b; --green: #1e8a5a;
-  --r: 14px; --max: 1160px;
+  --bg: #050a13; --bg2: #081221; --tx: #e6f1ff; --mut: #8ba3bd; --dim: #5d7590;
+  --cy: #22d3ee; --vi: #8b5cf6; --mg: #e879f9; --gr: #34d399; --am: #fbbf24; --rd: #fb7185;
+  --line: rgba(120, 200, 255, .16); --glass: rgba(255, 255, 255, .035); --max: 1180px;
+  --grad: linear-gradient(100deg, #22d3ee 0%, #818cf8 50%, #e879f9 100%);
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-body { margin: 0; color: var(--ink); background: var(--bg); font: 16px/1.75 "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, -apple-system, "Segoe UI", sans-serif; overflow-x: hidden; }
-h1, h2, h3 { margin: 0; line-height: 1.3; letter-spacing: .5px; }
-p { margin: 0; }
-a { color: inherit; text-decoration: none; }
-img { max-width: 100%; height: auto; display: block; }
-.wrap { max-width: var(--max); margin: 0 auto; padding: 0 22px; }
-section { padding: 84px 0; }
-.eyebrow { display: inline-block; font-size: 13px; font-weight: 700; letter-spacing: 3px; color: var(--pri); margin-bottom: 12px; }
-h2 { font-size: clamp(26px, 3.6vw, 38px); }
-.lead { color: var(--ink2); font-size: 17px; max-width: 720px; margin-top: 14px; }
-.center { text-align: center; } .center .lead { margin-left: auto; margin-right: auto; }
-.btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 26px; border-radius: 10px; font-weight: 700; font-size: 16px; transition: transform .2s, box-shadow .2s, background .2s; }
-.btn.pri { background: var(--cyan); color: var(--pri-d); box-shadow: 0 8px 24px rgba(127, 208, 230, .35); }
-.btn.pri:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(127, 208, 230, .5); }
-.btn.ghost { border: 1.5px solid rgba(255, 255, 255, .45); color: #fff; } .btn.ghost:hover { background: rgba(255, 255, 255, .1); }
-.btn.dark { background: var(--pri); color: #fff; } .btn.dark:hover { background: var(--pri-d); transform: translateY(-2px); }
-
-/* 進場動畫 */
-.rv { opacity: 0; transform: translateY(28px); transition: opacity .7s cubic-bezier(.2, .7, .2, 1), transform .7s cubic-bezier(.2, .7, .2, 1); transition-delay: var(--d, 0s); }
+body { margin: 0; background: var(--bg); color: var(--tx); font: 16px/1.75 "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, -apple-system, "Segoe UI", sans-serif; overflow-x: hidden; }
+h1, h2, h3, h4, p { margin: 0; } h1, h2, h3 { line-height: 1.25; letter-spacing: .5px; }
+a { color: inherit; text-decoration: none; } img { max-width: 100%; height: auto; display: block; }
+button { font: inherit; color: inherit; cursor: pointer; }
+.mono { font-family: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace; }
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 22px; position: relative; }
+section { padding: 96px 0; position: relative; }
+.grad { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 12.5px; letter-spacing: 4px; color: var(--cy); font-weight: 700; text-transform: uppercase; margin-bottom: 14px; }
+.eyebrow::before { content: ""; width: 26px; height: 1px; background: var(--cy); box-shadow: 0 0 8px var(--cy); }
+h2 { font-size: clamp(27px, 3.8vw, 42px); }
+.lead { color: var(--mut); font-size: 17px; max-width: 700px; margin-top: 14px; }
+.center { text-align: center; } .center .lead { margin-left: auto; margin-right: auto; } .center .eyebrow::after { content: ""; width: 26px; height: 1px; background: var(--cy); box-shadow: 0 0 8px var(--cy); }
+.rv { opacity: 0; transform: translateY(30px); transition: opacity .8s cubic-bezier(.2, .7, .2, 1), transform .8s cubic-bezier(.2, .7, .2, 1); transition-delay: var(--d, 0s); }
 .rv.in { opacity: 1; transform: none; }
-.rv.left { transform: translateX(-36px); } .rv.right { transform: translateX(36px); } .rv.left.in, .rv.right.in { transform: none; }
+.glass { background: var(--glass); border: 1px solid var(--line); border-radius: 18px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 26px; border-radius: 12px; font-weight: 700; font-size: 16px; border: 1px solid transparent; transition: transform .2s, box-shadow .2s, background .2s; }
+.btn.pri { background: var(--grad); color: #04121d; box-shadow: 0 0 0 1px rgba(255, 255, 255, .15) inset, 0 10px 36px rgba(34, 211, 238, .35); }
+.btn.pri:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(255, 255, 255, .25) inset, 0 14px 44px rgba(139, 92, 246, .5); }
+.btn.ghost { border-color: var(--line); background: rgba(255, 255, 255, .03); } .btn.ghost:hover { border-color: var(--cy); box-shadow: 0 0 22px rgba(34, 211, 238, .25); }
 
-/* 導覽列 */
-nav { position: fixed; inset: 0 0 auto 0; z-index: 50; transition: background .3s, box-shadow .3s; }
-nav.solid { background: rgba(11, 52, 70, .94); backdrop-filter: blur(8px); box-shadow: 0 2px 16px rgba(0, 0, 0, .2); }
-nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 62px; }
-.logo { display: flex; align-items: center; gap: 10px; color: #fff; font-weight: 700; font-size: 19px; letter-spacing: 3px; }
-.logo svg { width: 28px; height: 28px; }
-nav ul { display: flex; gap: 26px; list-style: none; margin: 0; padding: 0; font-size: 14.5px; color: #cfe3ec; }
-nav ul a:hover { color: #fff; }
-nav .cta { background: var(--cyan); color: var(--pri-d); padding: 7px 16px; border-radius: 8px; font-weight: 700; font-size: 14px; }
+/* 導覽 */
+nav { position: fixed; inset: 0 0 auto 0; z-index: 60; transition: background .3s, border-color .3s; border-bottom: 1px solid transparent; }
+nav.solid { background: rgba(5, 10, 19, .82); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-color: var(--line); }
+nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+.logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 19px; letter-spacing: 3px; }
+.logo svg { width: 28px; height: 28px; filter: drop-shadow(0 0 8px rgba(34, 211, 238, .7)); }
+nav ul { display: flex; gap: 28px; list-style: none; margin: 0; padding: 0; font-size: 14.5px; color: var(--mut); }
+nav ul a:hover { color: var(--tx); }
+nav .cta { padding: 7px 16px; border-radius: 9px; font-size: 14px; font-weight: 700; border: 1px solid var(--cy); color: var(--cy); } nav .cta:hover { background: rgba(34, 211, 238, .12); }
 
 /* Hero */
-.hero { position: relative; padding: 130px 0 0; color: #fff; background: radial-gradient(1200px 600px at 80% -10%, #1c7fa3 0%, transparent 60%), linear-gradient(160deg, #082938 0%, #0b3446 45%, #0f5c7a 100%); overflow: hidden; }
-.hero::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(127, 208, 230, .07) 1px, transparent 1px), linear-gradient(90deg, rgba(127, 208, 230, .07) 1px, transparent 1px); background-size: 46px 46px; mask-image: linear-gradient(#000 30%, transparent 85%); -webkit-mask-image: linear-gradient(#000 30%, transparent 85%); animation: grid 24s linear infinite; }
-@keyframes grid { to { background-position: 46px 46px; } }
-.hero .wrap { position: relative; }
-.hero .co { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; letter-spacing: 4px; color: var(--cyan); font-weight: 700; margin-bottom: 18px; }
-.hero h1 { font-size: clamp(32px, 5.4vw, 58px); max-width: 860px; }
-.hero h1 em { font-style: normal; color: var(--cyan); position: relative; white-space: nowrap; }
-.hero h1 em::after { content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 4px; border-radius: 2px; background: var(--cyan); transform-origin: left; animation: underline 1.1s .7s cubic-bezier(.2, .7, .2, 1) both; }
-@keyframes underline { from { transform: scaleX(0); } }
-.hero .sub { font-size: clamp(16px, 2vw, 19px); color: #cfe3ec; max-width: 680px; margin: 20px 0 30px; }
-.hero .acts { display: flex; gap: 14px; flex-wrap: wrap; }
-.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 30px; }
-.chips span { font-size: 13px; padding: 4px 12px; border-radius: 20px; background: rgba(255, 255, 255, .1); border: 1px solid rgba(127, 208, 230, .3); color: #dcecf2; animation: pop .5s both; animation-delay: calc(1s + var(--i) * .09s); }
-@keyframes pop { from { opacity: 0; transform: translateY(8px) scale(.9); } }
-.stage { position: relative; margin: 58px auto -120px; max-width: 1020px; perspective: 1600px; }
-.browser { border-radius: 14px 14px 0 0; overflow: hidden; background: #fff; box-shadow: 0 40px 90px rgba(0, 0, 0, .45); transform: rotateX(9deg); transform-origin: 50% 100%; animation: rise 1.2s .3s cubic-bezier(.2, .7, .2, 1) both; }
-@keyframes rise { from { opacity: 0; transform: rotateX(22deg) translateY(70px); } }
-.bar { height: 34px; background: #e9eef2; display: flex; align-items: center; gap: 7px; padding: 0 14px; }
-.bar i { width: 11px; height: 11px; border-radius: 50%; background: #f26a5c; } .bar i:nth-child(2) { background: #f4bf4f; } .bar i:nth-child(3) { background: #5ec26a; }
-.bar b { margin-left: 12px; flex: 1; max-width: 360px; height: 20px; border-radius: 6px; background: #fff; font-size: 11px; color: var(--ink3); font-weight: 400; line-height: 20px; padding: 0 10px; overflow: hidden; white-space: nowrap; }
-.float { position: absolute; background: #fff; color: var(--ink); border-radius: 12px; padding: 12px 16px; box-shadow: 0 16px 40px rgba(0, 0, 0, .28); font-size: 13.5px; display: flex; gap: 10px; align-items: center; animation: floaty 5s ease-in-out infinite; z-index: 2; }
-.float b { display: block; font-size: 15px; } .float small { color: var(--ink3); }
-.float .ic { width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center; font-weight: 800; color: #fff; flex: none; }
-.f1 { left: -38px; top: 22%; } .f1 .ic { background: var(--red); }
-.f2 { right: -44px; top: 12%; animation-delay: -1.6s; } .f2 .ic { background: var(--green); }
-.f3 { right: -26px; top: 56%; animation-delay: -3s; } .f3 .ic { background: var(--pri); }
-@keyframes floaty { 50% { transform: translateY(-12px); } }
-.after-hero { padding-top: 190px; }
+.hero { min-height: 100vh; min-height: 100svh; display: flex; align-items: center; padding: 110px 0 70px; overflow: hidden; background: radial-gradient(900px 520px at 78% 38%, rgba(139, 92, 246, .22), transparent 65%), radial-gradient(700px 480px at 12% 8%, rgba(34, 211, 238, .16), transparent 62%), var(--bg); }
+#net { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .9; }
+.hero::after { content: ""; position: absolute; inset: auto 0 0 0; height: 160px; background: linear-gradient(transparent, var(--bg)); pointer-events: none; }
+.hero-grid { display: grid; grid-template-columns: 1.08fr .92fr; gap: 30px; align-items: center; }
+.tag { display: inline-flex; align-items: center; gap: 9px; padding: 5px 14px 5px 8px; border-radius: 30px; border: 1px solid var(--line); background: rgba(34, 211, 238, .06); font-size: 13px; color: #bfe9f5; margin-bottom: 22px; }
+.tag i { width: 8px; height: 8px; border-radius: 50%; background: var(--gr); box-shadow: 0 0 0 0 rgba(52, 211, 153, .7); animation: ping 1.8s infinite; }
+@keyframes ping { 70% { box-shadow: 0 0 0 9px rgba(52, 211, 153, 0); } 100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); } }
+.hero h1 { font-size: clamp(34px, 5.6vw, 64px); font-weight: 800; }
+.hero h1 .grad { display: inline-block; background-size: 200% 100%; animation: shine 6s linear infinite; }
+@keyframes shine { to { background-position: -200% 0; } }
+.hero .sub { color: #b6c8dc; font-size: clamp(16px, 1.9vw, 19px); margin: 22px 0 14px; max-width: 590px; }
+.typed { height: 30px; color: var(--cy); font-size: 15px; } .typed::after { content: "▍"; animation: blink 1s steps(1) infinite; margin-left: 2px; }
+@keyframes blink { 50% { opacity: 0; } }
+.hero .acts { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 22px; }
 
-/* 痛點 */
-.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 44px; }
-.pain { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 26px; text-align: left; }
-.pain .n { font-size: 13px; font-weight: 800; color: var(--red); letter-spacing: 2px; }
-.pain h3 { font-size: 19px; margin: 8px 0; } .pain p { color: var(--ink2); font-size: 15px; }
+/* 軌道核心 */
+.core { position: relative; width: min(100%, 470px); aspect-ratio: 1; margin: 0 auto; }
+.core .ring { position: absolute; inset: var(--i); border-radius: 50%; border: 1px solid rgba(34, 211, 238, .28); animation: spin var(--t) linear infinite; }
+.core .ring:nth-child(2) { border-color: rgba(139, 92, 246, .35); border-style: dashed; animation-direction: reverse; }
+.core .ring:nth-child(3) { border-color: rgba(232, 121, 249, .22); }
+.core .ring::before { content: ""; position: absolute; top: -5px; left: 50%; width: 9px; height: 9px; border-radius: 50%; background: var(--cy); box-shadow: 0 0 14px 3px var(--cy); }
+.core .ring:nth-child(2)::before { background: var(--vi); box-shadow: 0 0 14px 3px var(--vi); top: auto; bottom: -5px; }
+.core .ring:nth-child(3)::before { background: var(--mg); box-shadow: 0 0 14px 3px var(--mg); left: 12%; top: 16%; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.core .heart { position: absolute; inset: 31%; border-radius: 50%; display: grid; place-items: center; background: radial-gradient(circle at 35% 30%, rgba(34, 211, 238, .45), rgba(139, 92, 246, .28) 55%, rgba(5, 10, 19, .2) 75%); box-shadow: 0 0 70px rgba(34, 211, 238, .45), inset 0 0 40px rgba(139, 92, 246, .5); animation: breathe 4s ease-in-out infinite; }
+@keyframes breathe { 50% { transform: scale(1.06); box-shadow: 0 0 110px rgba(139, 92, 246, .55), inset 0 0 50px rgba(34, 211, 238, .5); } }
+.core .heart svg { width: 46%; filter: drop-shadow(0 0 14px rgba(255, 255, 255, .7)); }
+.core .pulse { position: absolute; inset: 31%; border-radius: 50%; border: 1px solid var(--cy); animation: wave 3.2s ease-out infinite; opacity: 0; } .core .pulse.b { animation-delay: 1.6s; }
+@keyframes wave { 0% { transform: scale(1); opacity: .7; } 100% { transform: scale(2.7); opacity: 0; } }
+.sat { position: absolute; left: 50%; top: 50%; width: 0; height: 0; animation: spin 46s linear infinite; }
+.sat span { position: absolute; transform: rotate(var(--a)) translateX(var(--r)) rotate(calc(-1 * var(--a))); }
+.sat b { display: block; transform: translate(-50%, -50%); white-space: nowrap; font-size: 12.5px; font-weight: 700; padding: 4px 11px; border-radius: 20px; background: rgba(8, 18, 33, .9); border: 1px solid var(--line); color: #cfeaf6; box-shadow: 0 0 18px rgba(34, 211, 238, .22); animation: unspin 46s linear infinite; }
+@keyframes unspin { to { transform: translate(-50%, -50%) rotate(-360deg); } }
 
-/* 流程動畫 */
-.flow-sec { background: var(--pri-d); color: #fff; position: relative; overflow: hidden; }
-.flow-sec .eyebrow { color: var(--cyan); } .flow-sec .lead { color: #bcd3dd; }
-.flow { margin-top: 48px; display: grid; grid-template-columns: repeat(7, 1fr); gap: 0; position: relative; }
-.node { position: relative; text-align: center; padding: 0 6px; }
-.node::before { content: ""; position: absolute; top: 25px; left: -50%; width: 100%; height: 3px; background: rgba(255, 255, 255, .14); }
-.node:first-child::before { display: none; }
-.node::after { content: ""; position: absolute; top: 25px; left: -50%; width: 100%; height: 3px; background: var(--cyan); transform: scaleX(0); transform-origin: left; transition: transform .6s ease; }
-.node:first-child::after { display: none; }
-.node.on::after { transform: scaleX(1); }
-.dot { position: relative; z-index: 1; width: 52px; height: 52px; margin: 0 auto 12px; border-radius: 50%; display: grid; place-items: center; background: #164a60; border: 2px solid rgba(255, 255, 255, .18); font-weight: 800; font-size: 18px; color: #9fbfcc; transition: all .4s; }
-.node.on .dot { background: var(--cyan); color: var(--pri-d); border-color: var(--cyan); box-shadow: 0 0 0 8px rgba(127, 208, 230, .18); }
-.node.cur .dot { animation: pulse 1.2s infinite; }
-@keyframes pulse { 50% { box-shadow: 0 0 0 16px rgba(127, 208, 230, 0); } }
-.node b { display: block; font-size: 14.5px; color: #cfe3ec; transition: color .4s; } .node.on b { color: #fff; }
-.node small { display: block; font-size: 12px; color: #86a5b3; margin-top: 3px; line-height: 1.5; }
-.flow-detail { margin-top: 38px; background: rgba(255, 255, 255, .06); border: 1px solid rgba(127, 208, 230, .22); border-radius: var(--r); padding: 22px 26px; min-height: 124px; display: grid; grid-template-columns: auto 1fr; gap: 20px; align-items: center; }
-.flow-detail .big { font-size: 46px; font-weight: 800; color: var(--cyan); line-height: 1; width: 64px; text-align: center; }
-.flow-detail h3 { font-size: 20px; margin-bottom: 6px; } .flow-detail p { color: #bcd3dd; font-size: 15px; }
-.fade { animation: fade .5s both; } @keyframes fade { from { opacity: 0; transform: translateY(8px); } }
-.branch { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
-.branch > div { border-radius: 12px; padding: 16px 20px; font-size: 14.5px; border: 1px solid; }
-.branch .lo { background: rgba(30, 138, 90, .14); border-color: rgba(94, 194, 106, .4); } .branch .hi { background: rgba(192, 57, 43, .16); border-color: rgba(240, 120, 105, .45); }
-.branch b { display: block; font-size: 16px; margin-bottom: 2px; }
-.loops { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
-.loops > div { background: rgba(255, 255, 255, .05); border-radius: 12px; padding: 16px 20px; font-size: 14.5px; color: #bcd3dd; border-left: 4px solid var(--amber); }
-.loops b { color: #fff; display: block; font-size: 16px; }
+/* 滾動的標準列 */
+.marq { border-block: 1px solid var(--line); background: rgba(255, 255, 255, .02); overflow: hidden; padding: 14px 0; mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
+.marq div { display: flex; gap: 46px; width: max-content; animation: slide 38s linear infinite; color: var(--mut); font-size: 14px; letter-spacing: 1px; white-space: nowrap; }
+.marq b { color: var(--tx); } .marq i { color: var(--cy); font-style: normal; }
+@keyframes slide { to { transform: translateX(-50%); } }
 
-/* 特色卡片 */
-.feats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 46px; }
-.feat { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 24px 22px; transition: transform .25s, box-shadow .25s, border-color .25s; }
-.feat:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(15, 92, 122, .14); border-color: var(--cyan); }
-.feat .i { width: 46px; height: 46px; border-radius: 12px; background: var(--pri-l); color: var(--pri); display: grid; place-items: center; margin-bottom: 14px; }
-.feat .i svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-.feat h3 { font-size: 17.5px; margin-bottom: 6px; } .feat p { color: var(--ink2); font-size: 14.5px; line-height: 1.7; }
+/* 判定引擎 */
+.engine { display: grid; grid-template-columns: .95fr 1.05fr; gap: 22px; margin-top: 46px; align-items: stretch; }
+.panel { padding: 24px; }
+.panel h4 { font-size: 12.5px; letter-spacing: 3px; color: var(--mut); font-weight: 700; margin: 0 0 10px; display: flex; align-items: center; gap: 8px; } .panel h4 b { color: var(--cy); }
+.opts { display: grid; gap: 8px; margin-bottom: 22px; } .opts.c3 { grid-template-columns: repeat(3, 1fr); } .opts.c2 { grid-template-columns: repeat(2, 1fr); }
+.opt { text-align: left; padding: 11px 13px; border-radius: 12px; border: 1px solid var(--line); background: rgba(255, 255, 255, .03); transition: all .2s; font-size: 14.5px; line-height: 1.4; }
+.opt small { display: block; color: var(--dim); font-size: 12px; margin-top: 2px; }
+.opt:hover { border-color: rgba(34, 211, 238, .5); }
+.opt.on { border-color: var(--cy); background: linear-gradient(135deg, rgba(34, 211, 238, .16), rgba(139, 92, 246, .14)); box-shadow: 0 0 22px rgba(34, 211, 238, .2), inset 0 0 0 1px rgba(34, 211, 238, .25); } .opt.on small { color: #a9dcea; }
+.lvl { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; } .lvl .opt { text-align: center; padding: 9px 4px; } .lvl .opt b { display: block; font-size: 19px; }
+.lvl .opt.on.l3 { border-color: var(--am); box-shadow: 0 0 22px rgba(251, 191, 36, .25); background: rgba(251, 191, 36, .12); } .lvl .opt.on.l4 { border-color: var(--rd); box-shadow: 0 0 22px rgba(251, 113, 133, .28); background: rgba(251, 113, 133, .12); }
+.hud { position: relative; overflow: hidden; display: flex; flex-direction: column; }
+.hud::before { content: ""; position: absolute; inset: 0; background: linear-gradient(transparent 0, rgba(34, 211, 238, .07) 50%, transparent 100%); height: 34%; animation: scan 4.2s linear infinite; pointer-events: none; }
+@keyframes scan { from { transform: translateY(-110%); } to { transform: translateY(330%); } }
+.hud-top { display: flex; align-items: center; justify-content: space-between; font-size: 12px; letter-spacing: 2px; color: var(--dim); margin-bottom: 14px; }
+.hud-top span:first-child::before { content: "●"; color: var(--gr); margin-right: 7px; animation: blink 1.4s steps(1) infinite; }
+.kp { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.k { border: 1px solid var(--line); border-radius: 14px; padding: 13px 15px; background: rgba(5, 10, 19, .5); }
+.k span { font-size: 12.5px; color: var(--mut); display: block; } .k b { font-size: clamp(28px, 3.6vw, 40px); line-height: 1.15; font-variant-numeric: tabular-nums; } .k small { color: var(--dim); font-size: 12.5px; display: block; min-height: 20px; }
+.k.flag b { font-size: 21px; line-height: 1.9; } .k .yes { color: var(--rd); text-shadow: 0 0 18px rgba(251, 113, 133, .6); } .k .no { color: var(--gr); } .k .warn { color: var(--am); text-shadow: 0 0 18px rgba(251, 191, 36, .5); }
+.trace { margin-top: 14px; border: 1px solid var(--line); border-radius: 14px; background: rgba(2, 6, 12, .7); padding: 13px 15px; font-size: 13px; line-height: 1.85; flex: 1; min-height: 196px; }
+.trace div { opacity: 0; transform: translateX(-8px); animation: tin .35s forwards; animation-delay: calc(var(--n) * 90ms); white-space: pre-wrap; }
+@keyframes tin { to { opacity: 1; transform: none; } }
+.trace .c { color: var(--dim); } .trace .o { color: var(--gr); } .trace .w { color: var(--am); } .trace .r { color: var(--rd); } .trace em { color: var(--cy); font-style: normal; }
+.note { color: var(--dim); font-size: 12.5px; margin-top: 14px; }
 
-/* 深入介紹 */
-.deep { display: grid; grid-template-columns: 1fr 1.25fr; gap: 54px; align-items: center; margin-top: 80px; }
-.deep.flip .txt { order: 2; }
-.deep h3 { font-size: clamp(22px, 2.6vw, 28px); margin-bottom: 12px; }
-.deep p { color: var(--ink2); }
-.deep ul { margin: 16px 0 0; padding: 0; list-style: none; }
-.deep li { position: relative; padding-left: 30px; margin-bottom: 9px; font-size: 15.5px; }
-.deep li::before { content: ""; position: absolute; left: 0; top: 6px; width: 18px; height: 18px; border-radius: 50%; background: var(--pri-l) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M5 9.300l2.700 2.700 5.300-5.800' fill='none' stroke='%230f5c7a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain; }
-.shot { border-radius: 12px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 24px 60px rgba(11, 52, 70, .18); background: #fff; }
-.shot .bar { height: 28px; } .shot .bar i { width: 9px; height: 9px; }
+/* 管線與閘門 */
+.pipe { margin-top: 56px; position: relative; padding: 0 2%; }
+.rail { position: absolute; left: 6%; right: 6%; top: 37px; height: 3px; background: rgba(120, 200, 255, .14); border-radius: 3px; overflow: visible; }
+.rail::before { content: ""; position: absolute; inset: 0 auto 0 0; width: var(--p, 0%); background: var(--grad); box-shadow: 0 0 16px var(--cy); border-radius: 3px; transition: width .9s cubic-bezier(.4, 0, .2, 1); }
+.rail i { position: absolute; top: -4px; width: 11px; height: 11px; border-radius: 50%; background: #fff; box-shadow: 0 0 14px 4px var(--cy); animation: run 5.4s linear infinite; animation-delay: var(--dl); opacity: 0; }
+@keyframes run { 0% { left: 0; opacity: 0; } 6% { opacity: 1; } 94% { opacity: 1; } 100% { left: 100%; opacity: 0; } }
+.gates { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; position: relative; }
+.gate { text-align: center; cursor: pointer; }
+.gate .hex { width: 76px; height: 76px; margin: 0 auto 14px; display: grid; place-items: center; position: relative; }
+.gate .hex::before { content: ""; position: absolute; inset: 0; clip-path: polygon(25% 3%, 75% 3%, 100% 50%, 75% 97%, 25% 97%, 0 50%); background: #0d1c30; border: 0; transition: background .4s; }
+.gate .hex::after { content: ""; position: absolute; inset: -7px; border-radius: 50%; border: 1px solid transparent; transition: all .4s; }
+.gate .hex svg { position: relative; width: 28px; height: 28px; fill: none; stroke: var(--dim); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; transition: stroke .4s; }
+.gate.done .hex::before { background: linear-gradient(135deg, rgba(34, 211, 238, .5), rgba(52, 211, 153, .45)); } .gate.done .hex svg { stroke: #eafff6; }
+.gate.cur .hex::before { background: linear-gradient(135deg, #22d3ee, #8b5cf6); } .gate.cur .hex svg { stroke: #fff; }
+.gate.cur .hex::after { border-color: var(--cy); box-shadow: 0 0 28px rgba(34, 211, 238, .6); animation: breathe 2s ease-in-out infinite; }
+.gate b { display: block; font-size: 15.5px; color: var(--mut); transition: color .3s; } .gate.cur b, .gate.done b { color: var(--tx); }
+.gate small { color: var(--dim); font-size: 12.5px; }
+.gate-detail { margin-top: 34px; padding: 22px 26px; display: grid; grid-template-columns: auto 1fr; gap: 22px; align-items: center; min-height: 132px; }
+.gate-detail .n { font-size: 54px; font-weight: 800; line-height: 1; width: 70px; text-align: center; }
+.gate-detail h3 { font-size: 20px; margin-bottom: 8px; }
+.conds { display: flex; flex-wrap: wrap; gap: 8px; }
+.conds span { font-size: 13.5px; padding: 5px 12px; border-radius: 9px; border: 1px solid rgba(251, 113, 133, .4); background: rgba(251, 113, 133, .08); color: #ffd3da; animation: tin .4s both; animation-delay: calc(var(--n) * 110ms); }
+.conds span::before { content: "🔒"; margin-right: 6px; font-size: 12px; }
+.loops { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
+.loops > div { padding: 18px 22px; border-left: 3px solid var(--am); } .loops b { display: block; font-size: 16px; margin-bottom: 4px; } .loops p { color: var(--mut); font-size: 14.5px; }
 
-/* 風險試算 */
-.calc { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 24px; box-shadow: 0 24px 60px rgba(11, 52, 70, .12); }
-.calc label { display: grid; grid-template-columns: 96px 1fr 28px; gap: 12px; align-items: center; font-size: 14.5px; margin-bottom: 10px; color: var(--ink2); }
-.calc label b { color: var(--ink); text-align: center; font-size: 17px; }
-input[type=range] { width: 100%; accent-color: var(--pri); height: 26px; }
-.calc .out { display: grid; grid-template-columns: 1fr auto; gap: 18px; align-items: center; margin-top: 18px; padding-top: 18px; border-top: 1px dashed var(--line); }
-.calc .formula { font-size: 14.5px; color: var(--ink2); } .calc .formula b { font-size: 20px; color: var(--ink); }
-.score { min-width: 124px; text-align: center; border-radius: 12px; padding: 10px 16px; color: #fff; transition: background .35s; }
-.score b { display: block; font-size: 34px; line-height: 1.1; } .score span { font-size: 14px; font-weight: 700; letter-spacing: 2px; }
-.calc .rule { margin-top: 14px; font-size: 14.5px; padding: 10px 14px; border-radius: 10px; background: var(--bg); color: var(--ink2); min-height: 48px; }
-.mx { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-top: 18px; }
-.mx i { aspect-ratio: 2.4; border-radius: 6px; display: grid; place-items: center; font-style: normal; font-size: 12px; font-weight: 700; color: #fff; opacity: .32; transition: opacity .3s, transform .3s, box-shadow .3s; }
-.mx i.hit { opacity: 1; transform: scale(1.08); box-shadow: 0 6px 16px rgba(0, 0, 0, .25); }
-.l1 { background: #5fae86; } .l2 { background: #d2a92e; } .l3 { background: #dd8433; } .l4 { background: #c0392b; }
+/* Bento 特色 */
+.bento { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; margin-top: 48px; }
+.card { padding: 24px; position: relative; overflow: hidden; transition: transform .3s, border-color .3s, box-shadow .3s; min-height: 220px; display: flex; flex-direction: column; }
+.card:hover { transform: translateY(-5px); border-color: rgba(34, 211, 238, .55); box-shadow: 0 18px 50px rgba(34, 211, 238, .13); }
+.card::before { content: ""; position: absolute; width: 240px; height: 240px; right: -90px; top: -110px; border-radius: 50%; background: radial-gradient(circle, var(--glow, rgba(34, 211, 238, .2)), transparent 68%); pointer-events: none; }
+.card h3 { font-size: 19px; margin-bottom: 8px; position: relative; } .card p { color: var(--mut); font-size: 14.5px; line-height: 1.7; position: relative; }
+.card .viz { margin-top: auto; padding-top: 18px; position: relative; }
+.s2 { grid-column: span 2; } .s3 { grid-column: span 3; } .s4 { grid-column: span 4; }
+.new { position: absolute; top: 18px; right: 18px; font-size: 11px; letter-spacing: 2px; padding: 2px 9px; border-radius: 20px; background: var(--grad); color: #04121d; font-weight: 800; }
+.pills { display: flex; gap: 8px; flex-wrap: wrap; } .pills span { padding: 6px 14px; border-radius: 20px; border: 1px solid var(--line); font-size: 13.5px; color: var(--mut); animation: cyc 6s infinite; animation-delay: calc(var(--n) * 2s); }
+@keyframes cyc { 0%, 28% { border-color: var(--cy); color: #fff; background: rgba(34, 211, 238, .16); box-shadow: 0 0 18px rgba(34, 211, 238, .3); } 34%, 100% { border-color: var(--line); color: var(--mut); background: none; box-shadow: none; } }
+.chips { overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
+.chips div { display: flex; gap: 8px; width: max-content; animation: slide 26s linear infinite; } .chips div.rev { animation-direction: reverse; margin-top: 8px; }
+.chips span { font-size: 12.5px; padding: 4px 11px; border-radius: 8px; background: rgba(34, 211, 238, .08); border: 1px solid rgba(34, 211, 238, .22); color: #bfe9f5; white-space: nowrap; } .chips .v span { background: rgba(139, 92, 246, .1); border-color: rgba(139, 92, 246, .3); color: #d9cdfc; }
+.mini-mx { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; position: relative; max-width: 230px; }
+.mini-mx i { aspect-ratio: 1.6; border-radius: 5px; opacity: .55; } .mini-mx i.h { opacity: 1; animation: hot 2.4s ease-in-out infinite; }
+@keyframes hot { 50% { box-shadow: 0 0 18px 2px currentColor; transform: scale(1.08); } }
+.m1 { background: #1f6f55; color: #34d399; } .m2 { background: #8a6d12; color: #fbbf24; } .m3 { background: #a4501c; color: #fb923c; } .m4 { background: #a02a45; color: #fb7185; }
+.mini-mx::after { content: ""; position: absolute; inset: -4px auto -4px 0; width: 2px; background: var(--cy); box-shadow: 0 0 14px 3px var(--cy); animation: sweep 3.4s ease-in-out infinite alternate; }
+@keyframes sweep { to { left: 100%; } }
+.sliders div { height: 6px; border-radius: 4px; background: rgba(120, 200, 255, .14); margin: 13px 0; position: relative; }
+.sliders div::after { content: ""; position: absolute; top: -5px; width: 16px; height: 16px; border-radius: 50%; background: var(--cy); box-shadow: 0 0 14px var(--cy); animation: knob 5s ease-in-out infinite alternate; animation-delay: var(--dl); left: var(--from); }
+@keyframes knob { to { left: var(--to); } }
+.otp { display: flex; gap: 7px; } .otp i { width: 36px; height: 46px; border-radius: 9px; border: 1px solid var(--line); display: grid; place-items: center; font-style: normal; font-size: 21px; font-weight: 800; color: var(--cy); background: rgba(5, 10, 19, .6); transition: all .2s; } .otp i.f { border-color: var(--cy); box-shadow: 0 0 16px rgba(34, 211, 238, .35); }
+.logs { font-size: 12.5px; color: var(--mut); height: 92px; overflow: hidden; mask-image: linear-gradient(transparent, #000 25%, #000 75%, transparent); -webkit-mask-image: linear-gradient(transparent, #000 25%, #000 75%, transparent); }
+.logs div { animation: up 12s linear infinite; } .logs p { margin: 0; line-height: 2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 12.5px; } .logs em { color: var(--cy); font-style: normal; }
+@keyframes up { to { transform: translateY(-50%); } }
+.bars { display: flex; align-items: flex-end; gap: 7px; height: 78px; } .bars i { flex: 1; border-radius: 4px 4px 0 0; background: linear-gradient(to top, rgba(34, 211, 238, .25), var(--cy)); height: var(--h); transform-origin: bottom; animation: grow 3s ease-in-out infinite alternate; animation-delay: var(--dl); } .bars i.o { background: linear-gradient(to top, rgba(251, 113, 133, .25), var(--rd)); }
+@keyframes grow { from { transform: scaleY(.55); } }
+.roles { display: flex; gap: 8px; flex-wrap: wrap; } .roles span { font-size: 13px; padding: 5px 12px; border-radius: 9px; border: 1px solid var(--line); color: #cfe0f2; } .roles span b { color: var(--cy); margin-right: 5px; }
+
+/* 畫面展示 */
+.tabs { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 40px 0 22px; }
+.tabs button { padding: 8px 16px; border-radius: 30px; border: 1px solid var(--line); background: rgba(255, 255, 255, .03); font-size: 14px; color: var(--mut); position: relative; overflow: hidden; transition: all .25s; }
+.tabs button.on { color: #fff; border-color: var(--cy); box-shadow: 0 0 22px rgba(34, 211, 238, .28); }
+.tabs button.on::after { content: ""; position: absolute; left: 0; bottom: 0; height: 2px; background: var(--grad); animation: prog 6s linear forwards; }
+@keyframes prog { from { width: 0; } to { width: 100%; } }
+.holo { position: relative; max-width: 1020px; margin: 0 auto; perspective: 1800px; }
+.holo .frame { border-radius: 16px; overflow: hidden; border: 1px solid rgba(34, 211, 238, .45); box-shadow: 0 0 0 1px rgba(139, 92, 246, .25), 0 0 90px rgba(34, 211, 238, .22), 0 50px 120px rgba(0, 0, 0, .6); transform: rotateX(5deg); transform-origin: 50% 100%; position: relative; background: #0d1c30; }
+.holo .bar { height: 32px; background: #0b1626; display: flex; align-items: center; gap: 7px; padding: 0 14px; border-bottom: 1px solid var(--line); }
+.holo .bar i { width: 10px; height: 10px; border-radius: 50%; background: #fb7185; } .holo .bar i:nth-child(2) { background: #fbbf24; } .holo .bar i:nth-child(3) { background: #34d399; }
+.holo .bar span { margin-left: 12px; font-size: 12px; color: var(--dim); }
+.holo .shotbox { position: relative; aspect-ratio: 1980 / 1200; }
+.holo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; opacity: 0; transition: opacity .6s; } .holo img.on { opacity: 1; }
+.holo .frame::after { content: ""; position: absolute; inset: 32px 0 0 0; background: linear-gradient(transparent, rgba(34, 211, 238, .12), transparent); height: 30%; animation: scan 5s linear infinite; pointer-events: none; }
+.holo .cap { text-align: center; color: var(--mut); margin-top: 26px; font-size: 15.5px; min-height: 56px; max-width: 760px; margin-inline: auto; } .holo .cap b { color: var(--tx); display: block; font-size: 18px; margin-bottom: 4px; }
+.holo .ph { position: absolute; right: -34px; bottom: 12px; width: 168px; border-radius: 26px; border: 6px solid #0b1626; overflow: hidden; box-shadow: 0 0 50px rgba(139, 92, 246, .45), 0 30px 60px rgba(0, 0, 0, .6); animation: floaty 6s ease-in-out infinite; z-index: 2; }
+@keyframes floaty { 50% { transform: translateY(-14px); } }
 
 /* 數字 */
-.stats { background: linear-gradient(135deg, #0b3446, #0f5c7a); color: #fff; }
-.nums { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; text-align: center; }
-.nums b { display: block; font-size: clamp(38px, 5vw, 56px); line-height: 1.1; color: var(--cyan); font-variant-numeric: tabular-nums; }
-.nums span { font-size: 14.5px; color: #cfe3ec; }
-
-/* 管制層級 */
-.tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 44px; }
-.tier { border-radius: var(--r); padding: 26px; background: var(--card); border: 1px solid var(--line); border-top: 5px solid; position: relative; }
-.tier.t1 { border-top-color: #5fae86; } .tier.t2 { border-top-color: var(--amber); } .tier.t3 { border-top-color: var(--red); }
-.tier h3 { font-size: 20px; } .tier .who { font-size: 13.5px; color: var(--ink3); margin: 4px 0 14px; }
-.tier li { font-size: 14.5px; color: var(--ink2); margin-bottom: 6px; } .tier ul { margin: 0; padding-left: 20px; }
-.kinds { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-top: 26px; }
-.kinds span { padding: 6px 16px; border-radius: 20px; font-size: 14px; font-weight: 700; }
-.k1 { background: #e8f0fa; color: #2468b3; } .k2 { background: #f0ebf8; color: #6b4fa3; } .k3 { background: #fdf3df; color: #9a6a12; }
-
-/* 手機 + 登入 */
-.duo { display: grid; grid-template-columns: 1fr 1fr; gap: 54px; align-items: center; }
-.phones { display: flex; justify-content: center; gap: 22px; }
-.phone { width: 218px; border-radius: 30px; border: 8px solid #10222c; background: #10222c; overflow: hidden; box-shadow: 0 30px 60px rgba(11, 52, 70, .3); }
-.phone img { border-radius: 22px; } .phone:nth-child(2) { margin-top: 46px; }
-.otp { display: flex; gap: 8px; margin: 18px 0 8px; }
-.otp i { width: 46px; height: 56px; border-radius: 10px; border: 2px solid var(--line); background: #fff; display: grid; place-items: center; font-style: normal; font-size: 26px; font-weight: 800; color: var(--pri); transition: border-color .2s, transform .2s; }
-.otp i.fill { border-color: var(--pri); transform: translateY(-3px); }
-.otp-note { font-size: 13.5px; color: var(--ink3); height: 22px; }
-.otp-note.ok { color: var(--green); font-weight: 700; }
-
-/* 角色 */
-.roles { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-top: 40px; }
-.role { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 20px 16px; text-align: center; }
-.role b { display: block; font-size: 16px; margin-bottom: 6px; } .role p { font-size: 13.5px; color: var(--ink2); line-height: 1.6; }
-.sod { margin-top: 22px; background: var(--pri-l); border-radius: var(--r); padding: 20px 26px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; font-size: 14.5px; color: #1f4a5c; }
-.sod b { display: block; color: var(--pri-d); font-size: 15.5px; }
-
-/* 部署 */
-.deploy { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 40px; }
-.deploy > div { padding: 22px; border-radius: var(--r); border: 1px dashed #b7cbd6; }
-.deploy b { display: block; font-size: 17px; margin-bottom: 4px; } .deploy p { font-size: 14.5px; color: var(--ink2); }
+.nums { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; text-align: center; }
+.nums div { padding: 22px 8px; } .nums b { display: block; font-size: clamp(34px, 4.6vw, 52px); line-height: 1.1; font-variant-numeric: tabular-nums; } .nums span { color: var(--mut); font-size: 14px; }
 
 /* CTA */
-.cta-sec { background: radial-gradient(900px 400px at 50% 0%, #1c7fa3 0%, transparent 70%), #082938; color: #fff; text-align: center; }
-.cta-sec h2 { font-size: clamp(26px, 4vw, 40px); } .cta-sec p { color: #bcd3dd; margin: 14px auto 28px; max-width: 620px; }
-.cta-sec .acts { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-footer { background: #06202c; color: #86a5b3; font-size: 13.5px; padding: 26px 0; text-align: center; line-height: 2; }
-footer a { color: #cfe3ec; text-decoration: underline; }
+.final { text-align: center; overflow: hidden; background: radial-gradient(800px 380px at 50% 100%, rgba(139, 92, 246, .28), transparent 70%), radial-gradient(700px 320px at 50% 0%, rgba(34, 211, 238, .16), transparent 70%); }
+.final h2 { font-size: clamp(28px, 4.4vw, 46px); } .final p { color: var(--mut); max-width: 640px; margin: 16px auto 30px; } .final .acts { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+footer { border-top: 1px solid var(--line); color: var(--dim); font-size: 13px; padding: 28px 0; text-align: center; line-height: 2; } footer a { color: var(--mut); text-decoration: underline; }
 
 @media (max-width: 980px) {
-  nav ul { display: none; }
-  section { padding: 60px 0; }
-  .grid3, .tiers, .sod { grid-template-columns: 1fr; }
-  .feats, .deploy { grid-template-columns: 1fr 1fr; }
-  .roles { grid-template-columns: 1fr 1fr; } .roles .role:last-child { grid-column: 1 / -1; }
-  .nums { grid-template-columns: repeat(3, 1fr); row-gap: 28px; }
-  .deep, .duo { grid-template-columns: 1fr; gap: 28px; margin-top: 56px; } .deep.flip .txt { order: 0; }
-  .float { display: none; }
-  .stage { margin-bottom: -60px; } .after-hero { padding-top: 110px; }
-  .flow { grid-template-columns: 1fr; gap: 0; }
-  .node { display: grid; grid-template-columns: 52px 1fr; gap: 14px; text-align: left; padding: 0 0 22px; align-items: center; }
-  .node .dot { margin: 0; grid-row: span 2; } .node small { margin: 0; }
-  .node::before, .node::after { top: -50%; left: 25px; width: 3px; height: 100%; }
-  .node::after { transform: scaleY(0); transform-origin: top; } .node.on::after { transform: scaleY(1); }
-  .branch, .loops { grid-template-columns: 1fr; }
-  .flow-detail { grid-template-columns: 1fr; gap: 8px; } .flow-detail .big { text-align: left; }
+  nav ul { display: none; } section { padding: 68px 0; }
+  .hero-grid { grid-template-columns: 1fr; } .core { width: min(82vw, 360px); margin-top: 26px; } .sat b { font-size: 11px; padding: 3px 8px; }
+  .engine { grid-template-columns: 1fr; }
+  .rail { display: none; } .gates { grid-template-columns: repeat(5, 1fr); gap: 4px; } .gate .hex { width: 54px; height: 54px; } .gate .hex svg { width: 21px; height: 21px; } .gate b { font-size: 13px; } .gate small { display: none; }
+  .gate-detail { grid-template-columns: 1fr; gap: 6px; } .gate-detail .n { text-align: left; font-size: 40px; } .loops { grid-template-columns: 1fr; }
+  .bento { grid-template-columns: 1fr 1fr; } .s2, .s3, .s4 { grid-column: span 2; }
+  .holo .ph { display: none; } .holo .frame { transform: none; }
+  .nums { grid-template-columns: repeat(3, 1fr); }
 }
 @media (max-width: 560px) {
-  .feats, .deploy { grid-template-columns: 1fr; }
-  .nums { grid-template-columns: 1fr 1fr; }
-  .phone { width: 150px; border-width: 6px; border-radius: 22px; } .phone img { border-radius: 16px; }
-  .otp i { width: 40px; height: 50px; font-size: 22px; }
-  .hero { padding-top: 104px; }
-  .calc label { grid-template-columns: 78px 1fr 24px; }
+  .opts.c3 { grid-template-columns: 1fr; } .kp { gap: 8px; } .k { padding: 11px 12px; }
+  .bento { grid-template-columns: 1fr; } .s2, .s3, .s4 { grid-column: span 1; }
+  .nums { grid-template-columns: repeat(2, 1fr); } .trace { font-size: 12px; }
+  .hero { padding-top: 96px; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
-  .rv { opacity: 1; transform: none; }
-  html { scroll-behavior: auto; }
+  .rv, .trace div, .conds span { opacity: 1; transform: none; } html { scroll-behavior: auto; } .rail i { display: none; }
 }
 </style>
 </head>
 <body>
 
 <nav id="nav"><div class="wrap">
-  <a class="logo" href="#top"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3l11 4.200v8.300c0 6.800-4.600 11.900-11 14.200C9.600 27.400 5 22.300 5 15.500V7.200z" fill="#7fd0e6"/><path d="M10.800 16.300l3.700 3.700 6.900-7.400" fill="none" stroke="#0b3446" stroke-width="2.600" stroke-linecap="round" stroke-linejoin="round"/></svg>米數資科</a>
-  <ul><li><a href="#flow">安全流程</a></li><li><a href="#features">產品特色</a></li><li><a href="#risk">風險評鑑</a></li><li><a href="#controls">安全要求</a></li><li><a href="#deploy">部署</a></li></ul>
+  <a class="logo" href="#top"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3l11 4.200v8.300c0 6.800-4.600 11.900-11 14.200C9.600 27.400 5 22.300 5 15.500V7.200z" fill="#22d3ee"/><path d="M10.800 16.300l3.700 3.700 6.900-7.400" fill="none" stroke="#050a13" stroke-width="2.600" stroke-linecap="round" stroke-linejoin="round"/></svg>米數資科</a>
+  <ul><li><a href="#engine">判定引擎</a></li><li><a href="#flow">階段閘門</a></li><li><a href="#features">產品特色</a></li><li><a href="#screens">系統畫面</a></li></ul>
   <a class="cta" href="#contact">預約展示</a>
 </div></nav>
 
-<header class="hero" id="top"><div class="wrap">
-  <div class="co">米數資科　MEDSIG</div>
-  <h1>把資安要求，<br>做進專案的<em>每一個階段</em></h1>
-  <p class="sub">以 ISMS 為基礎的專案安全管理系統。從立案分類、重要性評估、風險評鑑到安全要求落實，與專案五階段管控環環相扣，沒做完就過不了關。</p>
-  <div class="acts"><a class="btn pri" href="#contact">預約產品展示</a><a class="btn ghost" href="#flow">看它怎麼運作 ↓</a></div>
-  <div class="chips" aria-label="對應標準">
-    <span style="--i:0">ISO 27001</span><span style="--i:1">TISAX</span><span style="--i:2">ISO 27701</span><span style="--i:3">ISO 42001</span><span style="--i:4">IEC 62443</span><span style="--i:5">ISO/SAE 21434</span>
-  </div>
-  <div class="stage">
-    <div class="float f1"><div class="ic">12</div><div><b>極高風險</b><small>須訂處理計畫並核准</small></div></div>
-    <div class="float f2"><div class="ic">✓</div><div><b>階段審查通過</b><small>規劃 → 執行</small></div></div>
-    <div class="float f3"><div class="ic">42</div><div><b>安全要求事項</b><small>高級管制已套用</small></div></div>
-    <div class="browser"><div class="bar"><i></i><i></i><i></i><b>專案安全管理系統 ／ 管理總覽</b></div><img src="img/dashboard.jpg" alt="系統管理總覽畫面：進行中專案、燈號、進度與風險矩陣" width="1980" height="1200"></div>
-  </div>
-</div></header>
+<header class="hero" id="top">
+  <canvas id="net" aria-hidden="true"></canvas>
+  <div class="wrap"><div class="hero-grid">
+    <div>
+      <div class="tag"><i></i>以 ISMS 為基礎的專案安全管理系統</div>
+      <h1>專案一立案<br><span class="grad">資安要求自動到位</span></h1>
+      <p class="sub">告訴系統這是什麼專案、有沒有委外廠商、對象是不是客戶，它就依貴公司的制度帶出階段管控、風險評鑑與安全要求事項，並在每一道階段審查把關。</p>
+      <div class="typed mono" id="typed" aria-hidden="true"></div>
+      <div class="acts"><a class="btn pri" href="#engine">親手試試判定引擎</a><a class="btn ghost" href="#contact">預約產品展示</a></div>
+    </div>
+    <div class="core" aria-hidden="true">
+      <div class="ring" style="--i:0%;--t:38s"></div><div class="ring" style="--i:11%;--t:27s"></div><div class="ring" style="--i:21%;--t:19s"></div>
+      <div class="pulse"></div><div class="pulse b"></div>
+      <div class="heart"><svg viewBox="0 0 32 32"><path d="M16 3l11 4.200v8.300c0 6.800-4.600 11.900-11 14.200C9.600 27.400 5 22.300 5 15.500V7.200z" fill="#fff"/><path d="M10.800 16.300l3.700 3.700 6.900-7.400" fill="none" stroke="#0b2a4a" stroke-width="2.600" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="sat">
+        <span style="--a:0deg;--r:clamp(120px,22vw,222px)"><b>ISO 27001</b></span><span style="--a:60deg;--r:clamp(120px,22vw,222px)"><b>TISAX</b></span><span style="--a:120deg;--r:clamp(120px,22vw,222px)"><b>ISO 27701</b></span>
+        <span style="--a:180deg;--r:clamp(120px,22vw,222px)"><b>ISO 42001</b></span><span style="--a:240deg;--r:clamp(120px,22vw,222px)"><b>IEC 62443</b></span><span style="--a:300deg;--r:clamp(120px,22vw,222px)"><b>ISO/SAE 21434</b></span>
+      </div>
+    </div>
+  </div></div>
+</header>
 
-<section class="after-hero center"><div class="wrap">
-  <span class="eyebrow rv">為什麼需要它</span>
-  <h2 class="rv">專案工具管進度，ISMS 文件管合規<br>中間的落差，稽核時才會發現</h2>
-  <div class="grid3">
-    <div class="pain rv" style="--d:.05s"><div class="n">落差 01</div><h3>專案啟動了，安全評估還沒做</h3><p>ISO 27001 A.5.8 與 TISAX 都要求專案納入資訊安全，但實務上常是結案前才補文件。</p></div>
-    <div class="pain rv" style="--d:.15s"><div class="n">落差 02</div><h3>風險評鑑和專案進度各走各的</h3><p>風險登錄在試算表，進度在另一套工具，沒有任何機制能阻止高風險專案直接進入執行。</p></div>
-    <div class="pain rv" style="--d:.25s"><div class="n">落差 03</div><h3>異動之後，沒有人重新評估</h3><p>換了委外廠商、改了架構、多了個資，原本的評鑑結果早已失效，卻沒有觸發複評。</p></div>
+<div class="marq" aria-hidden="true"><div id="marq"></div></div>
+
+<section id="engine"><div class="wrap">
+  <div class="center"><span class="eyebrow rv">Decision Engine</span>
+  <h2 class="rv">三個選擇，系統替您算出<span class="grad">該做的每一件事</span></h2>
+  <p class="lead rv">專案性質、專案類別、委外廠商合作型態：三個彼此獨立的維度，組合出專屬的管控清單與安全要求。請動手調整，右側即時顯示判定結果。</p></div>
+  <div class="engine">
+    <div class="panel glass rv">
+      <h4><b>01</b> 專案性質</h4><div class="opts c3" id="oNature"></div>
+      <h4><b>02</b> 專案類別</h4><div class="opts c2" id="oCat"></div>
+      <h4><b>03</b> 委外廠商合作（可複選）</h4><div class="opts c2" id="oSup"></div>
+      <h4><b>04</b> 安全重要性評估結果</h4><div class="lvl" id="oLvl"></div>
+    </div>
+    <div class="panel glass hud rv" style="--d:.1s">
+      <div class="hud-top mono"><span>RULE ENGINE · LIVE</span><span id="sig"></span></div>
+      <div class="kp">
+        <div class="k"><span>五階段管控項目</span><b class="grad" id="kItems">0</b><small id="kItemsS"></small></div>
+        <div class="k"><span>須落實的安全要求事項</span><b class="grad" id="kReqs">0</b><small id="kReqsS"></small></div>
+        <div class="k flag"><span>專案安全管理</span><b id="kSec"></b><small id="kSecS"></small></div>
+        <div class="k flag"><span>風險評鑑</span><b id="kRa"></b><small id="kRaS"></small></div>
+      </div>
+      <div class="trace mono" id="trace" aria-live="polite"></div>
+    </div>
   </div>
+  <p class="note center rv">判定依據是明確的規則，而非黑箱：每一項都能追溯到貴公司訂定的類別、範本與要求事項庫。上方數字依系統預設內容計算（未計入個資、AI、產品網路安全等構面另行帶入的要求），皆可由管理員調整。</p>
 </div></section>
 
-<section class="flow-sec" id="flow"><div class="wrap">
-  <div class="center"><span class="eyebrow rv">專案安全要求關聯流程</span>
-  <h2 class="rv">一條走得完、也擋得住的流程</h2>
-  <p class="lead rv">系統依專案性質自動決定要做哪些事，並把每一步綁定到階段審查。</p></div>
-  <div class="flow rv" id="flowNodes">
-    <div class="node"><div class="dot">1</div><b>專案基本資料</b><small>成員、角色與權限</small></div>
-    <div class="node"><div class="dot">2</div><b>性質及分類</b><small>8 大類別</small></div>
-    <div class="node"><div class="dot">3</div><b>重要性評估</b><small>九構面</small></div>
-    <div class="node"><div class="dot">4</div><b>風險評鑑</b><small>高／非常高</small></div>
-    <div class="node"><div class="dot">5</div><b>安全要求事項</b><small>三級管制</small></div>
-    <div class="node"><div class="dot">6</div><b>控制措施</b><small>管理・技術・實體</small></div>
-    <div class="node"><div class="dot">7</div><b>文件機密分級</b><small>四級</small></div>
+<section id="flow" style="background:linear-gradient(var(--bg), var(--bg2) 40%, var(--bg))"><div class="wrap">
+  <div class="center"><span class="eyebrow rv">Phase Gates</span>
+  <h2 class="rv">五道閘門，<span class="grad">沒做完就過不去</span></h2>
+  <p class="lead rv">安全要求不是結案前補的文件。每一道階段審查，系統都依實際紀錄判定條件是否成立，無法手動打勾。</p></div>
+  <div class="pipe rv">
+    <div class="rail" id="rail"><i style="--dl:0s"></i><i style="--dl:1.8s"></i><i style="--dl:3.6s"></i></div>
+    <div class="gates" id="gates"></div>
   </div>
-  <div class="flow-detail rv" id="flowDetail" aria-live="polite"><div class="big">1</div><div><h3></h3><p></p></div></div>
-  <div class="branch rv">
-    <div class="lo"><b>重要性 1、2：普通／中</b>流程於重要性評估後結束，可自願套用一般管制。</div>
-    <div class="hi"><b>重要性 3、4：高／非常高</b>須完成風險評鑑並經資安主管核准，才能由「規劃」進入「執行」。</div>
-  </div>
-  <div class="loops rv">
-    <div><b>異動管理及持續風險評鑑</b>已核准的異動若涉及安全影響，系統要求重新評估，完成前不得申請階段審查。</div>
-    <div><b>專案安全監督及稽核</b>監控階段須執行稽核；發現事項由稽核角色確認結案，全部結案才能結束專案。</div>
+  <div class="gate-detail glass rv" id="gateDetail" aria-live="polite"></div>
+  <div class="loops">
+    <div class="glass rv"><b>異動管理 → 持續風險評鑑</b><p>核准的異動若涉及安全影響（新增委外廠商、變更架構、擴大資料範圍），系統要求重新評估，完成前不得申請下一道審查。</p></div>
+    <div class="glass rv" style="--d:.1s"><b>安全監督及稽核 → 追蹤到結案</b><p>稽核發現由責任人填寫矯正措施，須經稽核或資安角色確認才能結案；改善者不能替自己結案。</p></div>
   </div>
 </div></section>
 
 <section id="features"><div class="wrap">
-  <div class="center"><span class="eyebrow rv">產品特色</span><h2 class="rv">專案管理該有的，資安要求該管的，都在這裡</h2></div>
-  <div class="feats">
-    <div class="feat rv" style="--d:0s"><div class="i"><svg viewBox="0 0 24 24"><path d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div><h3>8 類專案 × 5 階段</h3><p>策略、資本投資、產品開發、資訊、流程再造、設施整修、問題解決、作業專案，各有專屬的階段管控清單。</p></div>
-    <div class="feat rv" style="--d:.08s"><div class="i"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg></div><h3>階段審查擋關</h3><p>必要項目未完成、風險評鑑未核准、稽核發現未結案，系統直接擋下階段審查申請。</p></div>
-    <div class="feat rv" style="--d:.16s"><div class="i"><svg viewBox="0 0 24 24"><path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17h.01"/></svg></div><h3>內建風險評鑑</h3><p>九構面重要性評估、C／I／A 衝擊與可能性評分、處理計畫、殘餘風險與核准接受，並附威脅情境庫。</p></div>
-    <div class="feat rv" style="--d:.24s"><div class="i"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.500 8-8 9.500C7.500 20 4 17 4 12V6z"/><path d="M9 12l2 2 4-4.500"/></svg></div><h3>50 項安全要求庫</h3><p>一般／中級／高級管制累加套用，依個資、AI、產品網路安全構面自動加入對應要求。</p></div>
-    <div class="feat rv" style="--d:0s"><div class="i"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8.500 12.500l2.500 2.500 4.500-5"/></svg></div><h3>工作指派與追蹤</h3><p>指派、優先順序、進度回報、工時登錄與留言；清單、看板、甘特圖三種檢視，到期自動提醒。</p></div>
-    <div class="feat rv" style="--d:.08s"><div class="i"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M21 20H3"/></svg></div><h3>成本與效率分析</h3><p>預算對實際成本、實獲值 SPI／CPI、完工估算，以及人員準時完成率與工時效率。</p></div>
-    <div class="feat rv" style="--d:.16s"><div class="i"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 8l9 6 9-6"/></svg></div><h3>無密碼登入</h3><p>以 e-mail 一次性驗證碼登入，沒有密碼可外洩；備援 SMTP 與主機端緊急驗證碼確保不被鎖在門外。</p></div>
-    <div class="feat rv" style="--d:.24s"><div class="i"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M9 12h7M9 16h7M9 8h3"/></svg></div><h3>全程稽核軌跡</h3><p>登入、核准、異動皆留存紀錄；核准、驗證與結案落實職務區隔，稽核時直接調閱。</p></div>
-  </div>
-
-  <div class="deep">
-    <div class="txt rv left"><span class="eyebrow">五階段管控</span><h3>清單自動產生，做到哪裡一目了然</h3><p>建立專案時，系統依「專案性質及分類」組合出起始、規劃、執行、監控、結束五個階段的管控清單。</p>
-      <ul><li>共通項目＋類別專屬＋子類別項目＋安全管控項目</li><li>OEM 專案自動加入客戶圖面接收、返還或銷毀等項目</li><li>安全項目由系統依實際紀錄判定，無法手動打勾</li><li>可增列自訂項目；不適用須註明理由</li></ul></div>
-    <div class="shot rv right"><div class="bar"><i></i><i></i><i></i></div><img src="img/phases.jpg" alt="階段管控畫面：階段審查未完成事項與管控清單" loading="lazy" width="1980" height="1200"></div>
-  </div>
-
-  <div class="deep flip">
-    <div class="txt rv right"><span class="eyebrow">整體進度管控</span><h3>所有專案的進度、成本與風險，一頁看完</h3><p>管理階層不必等週報。實際進度對計畫進度、紅黃綠燈號、逾期工作與未處理風險即時呈現。</p>
-      <ul><li>SPI／CPI 低於門檻、逾期或超支自動亮燈</li><li>跨專案風險矩陣，掌握高風險集中在哪裡</li><li>待核准事項集中於待辦收件匣</li><li>專案清單可匯出 CSV</li></ul></div>
-    <div class="shot rv left"><div class="bar"><i></i><i></i><i></i></div><img src="img/reports.jpg" alt="成本與效率分析畫面：預算、實際成本、SPI、CPI 與人員效率" loading="lazy" width="1980" height="1200"></div>
-  </div>
-
-  <div class="deep">
-    <div class="txt rv left"><span class="eyebrow">工作指派與追蹤</span><h3>誰負責、何時到期、做到哪裡，一張圖看懂</h3><p>專案經理指派工作後，系統以 e-mail 通知負責人；成員回報進度與工時，時程隨即反映在甘特圖上。</p>
-      <ul><li>清單、看板、甘特圖三種檢視，隨時切換</li><li>逾期工作以紅色標示，今日位置一目了然</li><li>到期前與逾期自動寄送提醒</li><li>登錄的工時直接計入專案人力成本</li></ul></div>
-    <div class="shot rv right"><div class="bar"><i></i><i></i><i></i></div><img src="img/gantt.jpg" alt="工作甘特圖畫面：各項工作的期間、完成比例與逾期狀態" loading="lazy" width="1980" height="1200"></div>
-  </div>
-</div></section>
-
-<section id="risk" style="background:#fff"><div class="wrap">
-  <div class="deep" style="margin-top:0">
-    <div class="txt rv left"><span class="eyebrow">風險評鑑方法</span><h3>規則明確，結果可重現</h3>
-      <p>風險值 ＝ 衝擊 max(C, I, A) × 可能性。拖動右側滑桿，看看系統如何判定等級與處理原則。</p>
-      <ul><li>風險值高於 6 即不可接受，須訂處理方式、計畫、負責人與期限</li><li>送資安主管核准；核准後新增風險或分數變動須重新送審</li><li>實施後評估殘餘風險，仍超標者須經核准接受並記錄理由</li><li>內建 25 項威脅情境，依專案類別帶入</li></ul></div>
-    <div class="calc rv right" aria-label="風險值試算">
-      <label>機密性 C<input type="range" min="1" max="4" value="4" data-k="c"><b>4</b></label>
-      <label>完整性 I<input type="range" min="1" max="4" value="2" data-k="i"><b>2</b></label>
-      <label>可用性 A<input type="range" min="1" max="4" value="1" data-k="a"><b>1</b></label>
-      <label>可能性<input type="range" min="1" max="4" value="3" data-k="l"><b>3</b></label>
-      <div class="out"><div class="formula" id="formula"></div><div class="score l4" id="score"><b>12</b><span>極高</span></div></div>
-      <div class="rule" id="rule"></div>
-      <div class="mx" id="mx" aria-hidden="true"></div>
-    </div>
-  </div>
-  <div class="deep flip">
-    <div class="txt rv right"><span class="eyebrow">實際畫面</span><h3>評鑑、處理、核准，在同一個畫面完成</h3><p>風險矩陣即時反映未處理風險的分布；每一項風險的處理方式、負責人、期限、殘餘風險與狀態一列呈現。</p></div>
-    <div class="shot rv left"><div class="bar"><i></i><i></i><i></i></div><img src="img/risks.jpg" alt="專案安全風險評鑑畫面：風險矩陣與風險項目清單" loading="lazy" width="1980" height="1200"></div>
+  <div class="center"><span class="eyebrow rv">Capabilities</span>
+  <h2 class="rv">專案管理該有的，<span class="grad">資安要求該管的</span></h2></div>
+  <div class="bento">
+    <div class="card glass s3 rv" style="--glow:rgba(34,211,238,.22)"><span class="new">NEW</span><h3>三種專案性質，各有專屬管控</h3>
+      <p>內部專案防範圍蔓延、外部專案釐清權責分工（RACI）與驗收標準、客戶專案管好變更請求與階段驗收。申請時選定，系統自動帶出對應的階段管控項目。</p>
+      <div class="viz pills"><span style="--n:0">內部專案</span><span style="--n:1">外部專案</span><span style="--n:2">客戶專案</span></div></div>
+    <div class="card glass s3 rv" style="--d:.08s;--glow:rgba(139,92,246,.24)"><span class="new">NEW</span><h3>委外供應商安全，勾選即納管</h3>
+      <p>採購導入、機密資料往來、維運合約——只要有委外廠商，就自動加入供應商管控項目與 7 項安全要求，從簽約前評估到合約終止的資料返還。</p>
+      <div class="viz chips"><div><span>SP-01 簽約前資安評估</span><span>SP-02 合約資安條款與稽核權</span><span>SP-03 簽署 NDA</span><span>SP-04 加密傳輸與提供紀錄</span><span>SP-05 最小權限存取</span><span>SP-06 定期監督審查</span><span>SP-07 終止時返還銷毀</span><span>SP-01 簽約前資安評估</span><span>SP-02 合約資安條款與稽核權</span><span>SP-03 簽署 NDA</span><span>SP-04 加密傳輸與提供紀錄</span><span>SP-05 最小權限存取</span><span>SP-06 定期監督審查</span><span>SP-07 終止時返還銷毀</span></div></div></div>
+    <div class="card glass s2 rv" style="--glow:rgba(232,121,249,.2)"><span class="new">NEW</span><h3>客戶合約要求，逐項追蹤</h3>
+      <p>TISAX 與 ISO 27001 都要求符合客戶合約的安全要求。客戶專案自動帶入 6 項要求，逐項指定負責人並留存稽核佐證。</p>
+      <div class="viz chips"><div class="v rev"><span>CU-01 登錄客戶安全要求</span><span>CU-02 客戶資產造冊</span><span>CU-03 事件通報時限</span><span>CU-04 再委外須經同意</span><span>CU-05 資料返還銷毀</span><span>CU-06 稽核佐證</span><span>CU-01 登錄客戶安全要求</span><span>CU-02 客戶資產造冊</span><span>CU-03 事件通報時限</span><span>CU-04 再委外須經同意</span><span>CU-05 資料返還銷毀</span><span>CU-06 稽核佐證</span></div></div></div>
+    <div class="card glass s2 rv" style="--d:.08s;--glow:rgba(251,113,133,.2)"><h3>內建風險評鑑</h3>
+      <p>九構面重要性評估、C／I／A 衝擊與可能性評分、處理計畫、殘餘風險與核准接受，附 25 項威脅情境庫。</p>
+      <div class="viz"><div class="mini-mx"><i class="m2"></i><i class="m3"></i><i class="m4 h"></i><i class="m4"></i><i class="m1"></i><i class="m2 h"></i><i class="m3"></i><i class="m4"></i><i class="m1"></i><i class="m2"></i><i class="m2"></i><i class="m3 h"></i><i class="m1"></i><i class="m1"></i><i class="m1"></i><i class="m2"></i></div></div></div>
+    <div class="card glass s2 rv" style="--d:.16s;--glow:rgba(52,211,153,.2)"><span class="new">NEW</span><h3>制度由您定義</h3>
+      <p>專案性質與類別、五階段管控內容、風險評鑑方法、安全要求事項庫、品牌與 Logo，全部可在管理介面維護，不必改程式。</p>
+      <div class="viz sliders"><div style="--from:12%;--to:68%;--dl:0s"></div><div style="--from:74%;--to:30%;--dl:-1.4s"></div><div style="--from:40%;--to:86%;--dl:-2.6s"></div></div></div>
+    <div class="card glass s2 rv" style="--glow:rgba(34,211,238,.2)"><h3>無密碼登入，不怕被鎖在門外</h3>
+      <p>e-mail 一次性驗證碼，沒有密碼可外洩。備援郵件伺服器自動切換；郵件全面失效時，另有留存稽核軌跡的緊急程序。</p>
+      <div class="viz otp" id="otp"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+    <div class="card glass s2 rv" style="--d:.08s;--glow:rgba(139,92,246,.22)"><span class="new">NEW</span><h3>客戶試用與參觀帳號</h3>
+      <p>提供客戶試用時，只看得到自己的專案；單一「測試負責人」即可走完全部流程。參觀帳號則完全唯讀。</p>
+      <div class="viz roles"><span><b>◆</b>正式帳號</span><span><b>◆</b>客戶測試</span><span><b>◆</b>參觀（唯讀）</span></div></div>
+    <div class="card glass s2 rv" style="--d:.16s;--glow:rgba(251,191,36,.18)"><h3>進度、成本與效率</h3>
+      <p>清單、看板、甘特圖三種檢視；實獲值 SPI／CPI、完工估算、人員準時率與工時效率，紅黃綠燈號一眼掌握。</p>
+      <div class="viz bars"><i style="--h:46%;--dl:0s"></i><i style="--h:68%;--dl:-.4s"></i><i style="--h:58%;--dl:-.8s"></i><i class="o" style="--h:92%;--dl:-1.2s"></i><i style="--h:74%;--dl:-1.6s"></i><i style="--h:84%;--dl:-2s"></i><i style="--h:62%;--dl:-2.4s"></i></div></div>
+    <div class="card glass s3 rv" style="--glow:rgba(34,211,238,.18)"><h3>全程稽核軌跡與職務區隔</h3>
+      <p>登入、核准、設定變更、資料異動全部留痕。申請與核准分離、實施與驗證分離、改善與結案分離，稽核時直接調閱。</p>
+      <div class="viz logs mono"><div><p><em>gate_approve</em>　規劃階段審查通過</p><p><em>ra_approve</em>　風險評鑑核准：處理計畫可行</p><p><em>secreq_verify</em>　SP-03 已驗證</p><p><em>change_approve</em>　新增委外廠商；安全影響＝是</p><p><em>importance_eval</em>　重要性等級：高（3）</p><p><em>audit_update</em>　稽核發現結案</p><p><em>gate_approve</em>　規劃階段審查通過</p><p><em>ra_approve</em>　風險評鑑核准：處理計畫可行</p><p><em>secreq_verify</em>　SP-03 已驗證</p><p><em>change_approve</em>　新增委外廠商；安全影響＝是</p><p><em>importance_eval</em>　重要性等級：高（3）</p><p><em>audit_update</em>　稽核發現結案</p></div></div></div>
+    <div class="card glass s3 rv" style="--d:.08s;--glow:rgba(232,121,249,.18)"><h3>專案用到 AI、個資或連網產品？</h3>
+      <p>重要性評估涵蓋個資、人工智慧應用與產品網路安全構面。分數達門檻，自動帶入 ISO 27701、ISO 42001、IEC 62443 與 ISO/SAE 21434 的對應要求，例如禁止將機密資訊輸入未核准的外部 AI 服務、執行 TARA、建立 SBOM。</p>
+      <div class="viz chips"><div><span>AI-01 外部 AI 使用規範</span><span>AI-02 AI 系統衝擊評估</span><span>PI-04 個資衝擊評估</span><span>PS-01 TARA 威脅分析</span><span>PS-03 SBOM 與弱點管理</span><span>PS-06 網路安全案例</span><span>AI-01 外部 AI 使用規範</span><span>AI-02 AI 系統衝擊評估</span><span>PI-04 個資衝擊評估</span><span>PS-01 TARA 威脅分析</span><span>PS-03 SBOM 與弱點管理</span><span>PS-06 網路安全案例</span></div></div></div>
   </div>
 </div></section>
 
-<section class="stats"><div class="wrap"><div class="nums">
-  <div class="rv"><b data-n="8">0</b><span>專案類別</span></div>
-  <div class="rv" style="--d:.08s"><b data-n="5">0</b><span>階段管控</span></div>
-  <div class="rv" style="--d:.16s"><b data-n="9">0</b><span>重要性評估構面</span></div>
-  <div class="rv" style="--d:.24s"><b data-n="50">0</b><span>安全要求事項</span></div>
-  <div class="rv" style="--d:.32s"><b data-n="25">0</b><span>威脅情境</span></div>
+<section id="screens" style="background:linear-gradient(var(--bg), var(--bg2) 50%, var(--bg))"><div class="wrap">
+  <div class="center"><span class="eyebrow rv">Live Product</span><h2 class="rv">不是概念圖，是<span class="grad">實際運作的系統</span></h2></div>
+  <div class="tabs rv" id="tabs" role="tablist"></div>
+  <div class="holo rv">
+    <div class="frame"><div class="bar"><i></i><i></i><i></i><span id="shotTitle"></span></div><div class="shotbox" id="shotbox"></div></div>
+    <div class="ph"><img src="img/m-risks.jpg" alt="手機版風險評鑑畫面" loading="lazy" width="390" height="664" style="position:static;opacity:1"></div>
+    <div class="cap" id="cap" aria-live="polite"></div>
+  </div>
+</div></section>
+
+<section style="padding:54px 0"><div class="wrap"><div class="nums glass">
+  <div class="rv"><b class="grad" data-n="3">0</b><span>專案性質</span></div>
+  <div class="rv" style="--d:.06s"><b class="grad" data-n="8">0</b><span>專案類別</span></div>
+  <div class="rv" style="--d:.12s"><b class="grad" data-n="5">0</b><span>階段閘門</span></div>
+  <div class="rv" style="--d:.18s"><b class="grad" data-n="9">0</b><span>重要性評估構面</span></div>
+  <div class="rv" style="--d:.24s"><b class="grad" data-n="63">0</b><span>安全要求事項</span></div>
+  <div class="rv" style="--d:.3s"><b class="grad" data-n="25">0</b><span>威脅情境</span></div>
 </div></div></section>
 
-<section id="controls"><div class="wrap">
-  <div class="center"><span class="eyebrow rv">安全要求事項</span><h2 class="rv">依重要性分級，要求累加適用</h2>
-  <p class="lead rv">每一項都標示對應的標準條款，須填寫實施佐證，並由實施者以外的角色驗證。</p></div>
-  <div class="tiers">
-    <div class="tier t1 rv" style="--d:0s"><h3>一般管制</h3><div class="who">所有適用專案的基本要求</div><ul><li>成員簽署保密協議並完成資安宣導</li><li>資訊資產清冊與機密等級標示</li><li>最小權限、個人化帳號、定期備份</li></ul></div>
-    <div class="tier t2 rv" style="--d:.1s"><h3>中級管制</h3><div class="who">重要性「高」：一般＋中級</div><ul><li>風險評鑑並於各階段及重大異動時複評</li><li>供應商資安評估與合約安全條款</li><li>加密、多因子驗證、日誌審查</li></ul></div>
-    <div class="tier t3 rv" style="--d:.2s"><h3>高級管制</h3><div class="who">重要性「非常高」：一般＋中級＋高級</div><ul><li>須知原則名單與專案專屬保密切結</li><li>專案網段隔離、資料外洩防護</li><li>專屬管制區與原型保護</li></ul></div>
-  </div>
-  <div class="kinds rv"><span class="k1">管理控制</span><span class="k2">技術控制</span><span class="k3">實體控制</span></div>
-  <p class="center rv" style="color:var(--ink2);margin-top:18px;font-size:15px">涉及個資自動加入 ISO 27701 相關要求；使用 AI 加入 ISO 42001 相關要求；產品網路安全攸關者加入 IEC 62443、ISO/SAE 21434 相關要求。</p>
-  <div class="deep">
-    <div class="txt rv left"><span class="eyebrow">實際畫面</span><h3>42 項要求，逐項追蹤到驗證完成</h3><p>以一個重要性「非常高」的車用產品開發專案為例，系統套用高級管制並加入產品網路安全專屬要求，逐項顯示負責人、實施狀態與驗證結果。</p></div>
-    <div class="shot rv right"><div class="bar"><i></i><i></i><i></i></div><img src="img/reqs.jpg" alt="安全要求事項畫面：一般管制項目、負責人與驗證狀態" loading="lazy" width="1980" height="1200"></div>
-  </div>
-</div></section>
-
-<section style="background:#fff"><div class="wrap"><div class="duo">
-  <div class="phones rv left">
-    <div class="phone"><img src="img/m-dashboard.jpg" alt="手機版管理總覽" loading="lazy" width="390" height="664"></div>
-    <div class="phone"><img src="img/m-risks.jpg" alt="手機版風險評鑑" loading="lazy" width="390" height="664"></div>
-  </div>
-  <div class="rv right"><span class="eyebrow">隨處可用，登入安全</span><h2 style="font-size:clamp(24px,3vw,32px)">手機也好讀，而且不用記密碼</h2>
-    <p class="lead">電腦版側欄導覽、手機版底部導覽與卡片式清單，回報進度與核准不必回到座位。</p>
-    <div class="otp" id="otp" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
-    <div class="otp-note" id="otpNote">驗證碼已寄至您的信箱…</div>
-    <ul style="margin:14px 0 0;padding-left:20px;color:var(--ink2);font-size:15px">
-      <li>6 位數一次性驗證碼，10 分鐘有效、限用一次</li><li>錯誤 5 次即失效，並限制索取頻率</li><li>閒置自動登出；停用帳號立即撤銷登入</li><li>備援 SMTP 自動切換；郵件全面失效時有緊急程序</li></ul>
-  </div>
-</div></div></section>
-
-<section><div class="wrap">
-  <div class="center"><span class="eyebrow rv">角色與權限</span><h2 class="rv">誰能看、誰能做、誰來核准，分得清楚</h2></div>
-  <div class="roles">
-    <div class="role rv" style="--d:0s"><b>系統管理員</b><p>帳號核准、角色與系統設定</p></div>
-    <div class="role rv" style="--d:.06s"><b>管理階層／PMO</b><p>核准專案申請與階段審查</p></div>
-    <div class="role rv" style="--d:.12s"><b>資安主管</b><p>核准風險評鑑與風險接受</p></div>
-    <div class="role rv" style="--d:.18s"><b>稽核員</b><p>唯讀檢視並登錄稽核發現</p></div>
-    <div class="role rv" style="--d:.24s"><b>專案角色</b><p>專案經理、資安窗口、成員、觀察者</p></div>
-  </div>
-  <div class="sod rv"><div><b>申請與核准分離</b>專案立案與階段審查由管理階層核准。</div><div><b>實施與驗證分離</b>安全要求不得由實施負責人自行驗證。</div><div><b>改善與結案分離</b>稽核發現須由稽核或資安角色確認後結案。</div></div>
-</div></section>
-
-<section id="deploy" style="background:#fff"><div class="wrap">
-  <div class="center"><span class="eyebrow rv">部署</span><h2 class="rv">資料留在您自己的主機</h2><p class="lead rv">不依賴外部雲端服務，適合對資料落地與存取管控有要求的組織。</p></div>
-  <div class="deploy">
-    <div class="rv" style="--d:0s"><b>自有主機部署</b><p>可安裝於內部伺服器或自管雲端主機，支援 Docker。</p></div>
-    <div class="rv" style="--d:.08s"><b>不需另建資料庫</b><p>資料存於單一資料夾，備份與搬遷只要複製檔案。</p></div>
-    <div class="rv" style="--d:.16s"><b>Windows 一鍵啟動</b><p>提供啟動批次檔，評估與小型團隊可直接於本機執行。</p></div>
-    <div class="rv" style="--d:.24s"><b>示範資料立即體驗</b><p>首次啟動附 9 個示範專案，正式啟用前可一鍵清除。</p></div>
-  </div>
-</div></section>
-
-<section class="cta-sec" id="contact"><div class="wrap">
-  <h2 class="rv">讓每一個專案，從第一天就符合資安要求</h2>
-  <p class="rv">歡迎與我們聯絡，安排產品展示或討論貴公司的專案安全管理制度。</p>
+<section class="final" id="contact"><div class="wrap">
+  <span class="eyebrow rv" style="justify-content:center">Get Started</span>
+  <h2 class="rv">讓每一個專案，<span class="grad">從第一天就把資安管進流程</span></h2>
+  <p class="rv">可部署於貴公司自有主機，資料留在自己手上。歡迎與我們聯絡，安排產品展示或討論貴公司的專案安全管理制度。</p>
   <div class="acts rv"><a class="btn pri" href="mailto:isms@medsigtw.com?subject=%E5%B0%88%E6%A1%88%E5%AE%89%E5%85%A8%E7%AE%A1%E7%90%86%E7%B3%BB%E7%B5%B1%E5%B1%95%E7%A4%BA%E9%A0%90%E7%B4%84">isms@medsigtw.com</a><a class="btn ghost" href="https://www.medsigtw.com/" target="_blank" rel="noopener">米數資科官方網站</a></div>
 </div></section>
 
@@ -408,7 +362,7 @@ footer a { color: #cfe3ec; text-decoration: underline; }
   米數資科－以ISMS為基礎的專案安全管理系統<br>
   對應 資訊安全 ISO 27001／TISAX．個資保護 ISO 27701．人工智慧 ISO 42001．IEC 62443．ISO/SAE 21434 之專案安全要求<br>
   系統開發：<a href="https://www.medsigtw.com/" target="_blank" rel="noopener">https://www.medsigtw.com/</a>　技術支援：<a href="mailto:isms@medsigtw.com">isms@medsigtw.com</a><br>
-  <span style="font-size:12px">畫面中之專案與人員均為示範資料。本系統協助落實各標準之專案安全要求，不代表取得該等標準之驗證。</span>
+  <span style="font-size:12px">畫面中之專案與人員均為示範資料。本系統以規則協助落實各標準之專案安全要求，不代表取得該等標準之驗證。</span>
 </div></footer>
 
 <script>
@@ -416,77 +370,156 @@ footer a { color: #cfe3ec; text-decoration: underline; }
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
-  // 導覽列底色
-  const nav = $('#nav');
-  const onScroll = () => nav.classList.toggle('solid', scrollY > 40);
+  // ── 導覽列 ──
+  const nav = $('#nav'); const onScroll = () => nav.classList.toggle('solid', scrollY > 30);
   addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
-  // 進場動畫與數字遞增
-  const count = (el) => {
-    const n = +el.dataset.n; if (reduce) { el.textContent = n; return; }
-    const t0 = performance.now(); const dur = 1100;
-    const tick = (t) => { const p = Math.min(1, (t - t0) / dur); el.textContent = Math.round(n * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(tick); };
-    requestAnimationFrame(tick);
+  // ── 數字補間 ──
+  const tween = (el, to, dur = 700) => {
+    const from = Number(el.dataset.v || 0); el.dataset.v = to;
+    if (reduce || from === to) { el.textContent = to; return; }
+    const t0 = performance.now();
+    const step = (t) => { const p = Math.min(1, (t - t0) / dur); el.textContent = Math.round(from + (to - from) * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(step); };
+    requestAnimationFrame(step);
   };
+
+  // ── 進場 ──
   const io = new IntersectionObserver((es) => es.forEach((e) => {
-    if (!e.isIntersecting) return;
-    e.target.classList.add('in'); io.unobserve(e.target);
-    const b = $('b[data-n]', e.target); if (b) count(b);
-  }), { threshold: 0.14 });
+    if (!e.isIntersecting) return; e.target.classList.add('in'); io.unobserve(e.target);
+    const b = $('b[data-n]', e.target); if (b) tween(b, +b.dataset.n, 1200);
+  }), { threshold: 0.12 });
   $$('.rv').forEach((el) => io.observe(el));
 
-  // 流程動畫
-  const STEPS = [
-    ['專案基本資料', '建立專案並指定專案經理、資安窗口與成員；成員、角色與權限決定誰能看到、誰能異動。'],
-    ['專案性質及分類', '選擇 8 大類別與子類別，系統據此產生五階段管控清單。產品開發與資訊專案強制適用專案安全管理。'],
-    ['專案安全重要性評估', '就機密性、完整性、可用性、個資、客戶要求、法規、產品網路安全、AI、委外九個構面各評 1～4 分，取最高分為重要性等級。'],
-    ['專案安全風險評鑑', '重要性為高或非常高者，識別風險情境並評分，擬定處理計畫後送資安主管核准。'],
-    ['設定安全要求事項', '依重要性套用一般、中級、高級管制，並依個資、AI、產品網路安全構面加入專屬要求。'],
-    ['管理・技術・實體控制', '逐項指定負責人、填寫實施佐證，再由實施者以外的角色驗證有效性。'],
-    ['專案文件機密等級分類', '建立專案文件清冊，區分公開、內部、機密、極機密四級，並記錄保管人、存放位置與結案處置。'],
-  ];
-  const nodes = $$('#flowNodes .node'); const det = $('#flowDetail');
-  let cur = -1; let timer = null;
-  const show = (i) => {
-    cur = i;
-    nodes.forEach((n, k) => { n.classList.toggle('on', k <= i); n.classList.toggle('cur', k === i); });
-    det.innerHTML = `<div class="big fade">${i + 1}</div><div class="fade"><h3>${STEPS[i][0]}</h3><p>${STEPS[i][1]}</p></div>`;
+  // ── 粒子網路背景 ──
+  const cv = $('#net'); const cx = cv.getContext('2d'); let W = 0; let H = 0; let pts = []; let raf = 0; const mouse = { x: -999, y: -999 };
+  const size = () => {
+    const r = cv.getBoundingClientRect(); const dpr = Math.min(2, devicePixelRatio || 1);
+    W = r.width; H = r.height; cv.width = W * dpr; cv.height = H * dpr; cx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const n = Math.min(110, Math.round((W * H) / 13000));
+    pts = Array.from({ length: n }, () => ({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - 0.5) * 0.35, vy: (Math.random() - 0.5) * 0.35, r: Math.random() * 1.6 + 0.6, c: Math.random() < 0.5 ? '34,211,238' : '139,92,246' }));
   };
-  const play = () => { clearInterval(timer); if (reduce) return; timer = setInterval(() => show((cur + 1) % STEPS.length), 3200); };
-  nodes.forEach((n, i) => { n.style.cursor = 'pointer'; n.addEventListener('click', () => { show(i); play(); }); });
-  show(0);
-  new IntersectionObserver((es) => es.forEach((e) => (e.isIntersecting ? play() : clearInterval(timer))), { threshold: 0.25 }).observe($('#flow'));
+  const draw = () => {
+    cx.clearRect(0, 0, W, H);
+    for (const p of pts) {
+      p.x += p.vx; p.y += p.vy; if (p.x < 0 || p.x > W) p.vx *= -1; if (p.y < 0 || p.y > H) p.vy *= -1;
+      const dm = Math.hypot(p.x - mouse.x, p.y - mouse.y); if (dm < 150) { p.x += (p.x - mouse.x) / dm * 0.6; p.y += (p.y - mouse.y) / dm * 0.6; }
+      cx.beginPath(); cx.arc(p.x, p.y, p.r, 0, 6.283); cx.fillStyle = `rgba(${p.c},.85)`; cx.fill();
+    }
+    for (let i = 0; i < pts.length; i++) for (let j = i + 1; j < pts.length; j++) {
+      const a = pts[i]; const b = pts[j]; const d = Math.hypot(a.x - b.x, a.y - b.y);
+      if (d < 125) { cx.beginPath(); cx.moveTo(a.x, a.y); cx.lineTo(b.x, b.y); cx.strokeStyle = `rgba(${a.c},${0.2 * (1 - d / 125)})`; cx.lineWidth = 1; cx.stroke(); }
+    }
+    raf = requestAnimationFrame(draw);
+  };
+  size(); addEventListener('resize', size);
+  $('.hero').addEventListener('pointermove', (e) => { const r = cv.getBoundingClientRect(); mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; });
+  if (reduce) { draw(); cancelAnimationFrame(raf); } else new IntersectionObserver((es) => es.forEach((e) => { cancelAnimationFrame(raf); if (e.isIntersecting) draw(); })).observe(cv);
 
-  // 風險試算
-  const LV = [null, ['低', 'l1', '可接受，維持現有控制並持續監控。'], ['中', 'l2', '原則可接受，由專案經理評估是否強化控制。'], ['高', 'l3', '不可接受：須擬定風險處理計畫，並指定負責人與期限。'], ['極高', 'l4', '不可接受：須立即處理；殘餘風險須經資安主管核准接受。']];
-  const lv = (s) => (s >= 12 ? 4 : s >= 8 ? 3 : s >= 4 ? 2 : 1);
-  const mx = $('#mx');
-  for (let imp = 4; imp >= 1; imp--) for (let l = 1; l <= 4; l++) mx.insertAdjacentHTML('beforeend', `<i class="l${lv(imp * l)}" data-c="${imp}-${l}">${imp * l}</i>`);
-  const inputs = $$('.calc input');
-  const calc = () => {
-    const v = {}; inputs.forEach((x) => { v[x.dataset.k] = +x.value; x.nextElementSibling.textContent = x.value; });
-    const imp = Math.max(v.c, v.i, v.a); const s = imp * v.l; const L = LV[lv(s)];
-    $('#formula').innerHTML = `衝擊 max(${v.c}, ${v.i}, ${v.a}) × 可能性 ${v.l}<br><b>${imp} × ${v.l} ＝ ${s}</b>`;
-    const sc = $('#score'); sc.className = `score ${L[1]}`; sc.innerHTML = `<b>${s}</b><span>${L[0]}</span>`;
-    $('#rule').textContent = L[2];
-    $$('i', mx).forEach((c) => c.classList.toggle('hit', c.dataset.c === `${imp}-${v.l}`));
-  };
-  inputs.forEach((x) => x.addEventListener('input', calc)); calc();
+  // ── 打字機 ──
+  const lines = ['> 性質：客戶專案　→ 強制安全管理', '> 委外：機密資料往來　→ 加入供應商安全要求', '> 重要性：高　→ 須完成風險評鑑並經核准', '> 階段審查：條件未成立　→ 無法進入執行階段'];
+  const ty = $('#typed');
+  if (reduce) ty.textContent = lines[0]; else { let li = 0; let ci = 0; let del = false;
+    const tick = () => { const s = lines[li]; ty.textContent = s.slice(0, ci); if (!del && ci < s.length) { ci++; setTimeout(tick, 42); } else if (!del) { del = true; setTimeout(tick, 1900); } else if (ci > 0) { ci -= 2; if (ci < 0) ci = 0; setTimeout(tick, 16); } else { del = false; li = (li + 1) % lines.length; setTimeout(tick, 300); } };
+    tick(); }
 
-  // 驗證碼輸入動畫
-  const cells = $$('#otp i'); const note = $('#otpNote');
-  const typeOtp = () => {
-    const code = String(Math.floor(100000 + Math.random() * 900000));
-    cells.forEach((c) => { c.textContent = ''; c.classList.remove('fill'); });
-    note.textContent = '驗證碼已寄至您的信箱…'; note.classList.remove('ok');
-    [...code].forEach((ch, i) => setTimeout(() => { cells[i].textContent = ch; cells[i].classList.add('fill'); }, 700 + i * 260));
-    setTimeout(() => { note.textContent = '✓ 驗證成功，已登入'; note.classList.add('ok'); }, 700 + 6 * 260 + 250);
+  // ── 跑馬燈 ──
+  const mq = ['<b>ISO/IEC 27001</b> A.5.8 專案管理之資訊安全', '<b>TISAX</b> VDA ISA 1.2.3 專案之資訊安全要求', '<b>ISO/IEC 27001</b> A.5.19–A.5.22 供應商關係', '<b>TISAX</b> VDA ISA 6.1 委外與合作夥伴', '<b>ISO/IEC 27001</b> A.5.31 合約要求', '<b>ISO/IEC 27701</b> 個資保護', '<b>ISO/IEC 42001</b> AI 管理', '<b>IEC 62443</b> 工控網路安全', '<b>ISO/SAE 21434</b> 車輛網路安全'].map((t) => `<span>${t}　<i>◆</i></span>`).join('');
+  $('#marq').innerHTML = mq + mq;
+
+  // ── 判定引擎（數字取自系統預設之範本與要求事項庫）──
+  const D = { common: [23, 15], security: [13, 13], sp: 7, cu: 6,
+    cat: { 4: { n: [24, 15], sec: true, name: '資訊專案', sub: '系統發展類', tiers: [11, 13, 11] }, 3: { n: [25, 18], sec: true, name: '產品開發專案', sub: 'OEM（Build to Print）', tiers: [11, 12, 12] }, 5: { n: [16, 10], sec: false, name: '企業流程再造', sub: '流程與組織改造', tiers: [11, 11, 10] }, 6: { n: [18, 12], sec: false, name: '設施整修', sub: '廠辦與機房工程', tiers: [11, 11, 10] } },
+    nature: { internal: { n: [9, 5], sec: false, name: '內部專案', sub: '對象為公司內部' }, external: { n: [10, 7], sec: true, name: '外部專案', sub: '與第三方深度協作' }, client: { n: [17, 13], sec: true, name: '客戶專案', sub: '受客戶委託並交付' } },
+    sup: { procure: { n: [9, 6], name: '採購導入', sub: '廠商為主要執行者' }, data: { n: [6, 5], name: '機密資料往來', sub: '提供或接收機密資料' }, ops: { n: [5, 5], name: '維運合約', sub: '廠商依合約維運' }, other: { n: [3, 2], name: '其他委外合作', sub: '開發、顧問、人力' } } };
+  const LV = [null, '普通', '中', '高', '非常高']; const TIER = ['一般管制', '中級管制', '高級管制'];
+  const st = { nature: 'client', cat: '4', sup: new Set(['data']), lvl: 3 };
+  const mk = (id, items, on, cls = '') => { $(id).innerHTML = items.map(([k, v]) => `<button type="button" class="opt ${cls} ${on(k) ? 'on' : ''}" data-k="${k}" aria-pressed="${on(k)}">${v}</button>`).join(''); };
+  const render = () => {
+    mk('#oNature', Object.entries(D.nature).map(([k, v]) => [k, `${v.name}<small>${v.sub}</small>`]), (k) => st.nature === k);
+    mk('#oCat', Object.entries(D.cat).map(([k, v]) => [k, `${v.name}<small>${v.sub}</small>`]), (k) => st.cat === k);
+    mk('#oSup', Object.entries(D.sup).map(([k, v]) => [k, `${v.name}<small>${v.sub}</small>`]), (k) => st.sup.has(k));
+    $('#oLvl').innerHTML = [1, 2, 3, 4].map((l) => `<button type="button" class="opt l${l} ${st.lvl === l ? 'on' : ''}" data-k="${l}" aria-pressed="${st.lvl === l}"><b>${l}</b>${LV[l]}</button>`).join('');
+    const N = D.nature[st.nature]; const C = D.cat[st.cat]; const sups = [...st.sup].map((k) => D.sup[k]);
+    const sec = C.sec || N.sec || sups.length > 0; const full = sec && st.lvl >= 3; const must = sec && (full || sups.length > 0 || N.sec);
+    const sum = (i) => D.common[i] + N.n[i] + C.n[i] + sups.reduce((a, s) => a + s.n[i], 0) + (sec ? D.security[i] : 0);
+    const tiers = !sec ? 0 : full ? (st.lvl === 4 ? 3 : 2) : must ? 1 : 0;
+    const base = C.tiers.slice(0, tiers).reduce((a, b) => a + b, 0); const sp = tiers && sups.length ? D.sp : 0; const cu = tiers && st.nature === 'client' ? D.cu : 0;
+    tween($('#kItems'), sum(0)); $('#kItemsS').textContent = `其中必要項目 ${sum(1)} 項`;
+    tween($('#kReqs'), base + sp + cu); $('#kReqsS').textContent = tiers ? `${TIER.slice(0, tiers).join('＋')}${sp ? '＋供應商' : ''}${cu ? '＋客戶合約' : ''}` : sec ? `可自願套用一般管制 ${C.tiers[0]} 項` : '本專案不強制';
+    $('#kSec').innerHTML = sec ? '<span class="yes">強制適用</span>' : '<span class="no">不強制</span>'; $('#kSecS').textContent = sec ? '須完成安全重要性評估' : '可自願適用';
+    $('#kRa').innerHTML = !sec ? '<span class="no">免辦</span>' : full ? '<span class="yes">必須實施</span>' : '<span class="warn">免辦正式評鑑</span>'; $('#kRaS').textContent = full ? '須經資安主管核准' : sec ? `重要性「${LV[st.lvl]}」` : '';
+    $('#sig').textContent = `#${(sum(0) * 31 + (base + sp + cu) * 7 + st.lvl).toString(16).toUpperCase().padStart(4, '0')}`;
+    const T = []; const add = (c, t) => T.push(`<div class="${c}" style="--n:${T.length}">${t}</div>`);
+    add('c', `$ evaluate --nature <em>${N.name}</em> --category <em>${C.name}</em>`);
+    add('', `＋ 共通項目 ${D.common[0]}　＋ ${N.name}項目 ${N.n[0]}　＋ ${C.name}項目 ${C.n[0]}`);
+    sups.forEach((s) => add('w', `＋ 委外「${s.name}」管控項目 ${s.n[0]}（列為安全項目）`));
+    if (sec) add('r', `▲ 強制安全管理：${[C.sec && `類別「${C.name}」`, N.sec && `性質「${N.name}」`, sups.length && '有委外廠商'].filter(Boolean).join('、')}`); else add('o', '✓ 類別與性質皆不強制，且無委外廠商');
+    if (sec) add('', `＋ 安全管控項目 ${D.security[0]}（由系統依實際紀錄判定）`);
+    if (sec) add(full ? 'r' : 'o', full ? `▲ 重要性「${LV[st.lvl]}」→ 風險評鑑必辦，套用${TIER.slice(0, tiers).join('＋')}` : `✓ 重要性「${LV[st.lvl]}」→ 免辦正式風險評鑑`);
+    if (sp) add('w', `＋ 委外供應商安全要求 SP-01～07（ISO 27001 A.5.19–A.5.22）`);
+    if (cu) add('w', `＋ 客戶合約安全要求 CU-01～06（ISO 27001 A.5.31）`);
+    if (sec && !full && must) add('w', '▲ 雖免辦風險評鑑，仍須設定並落實安全要求，方可通過審查');
+    add('o', `✓ 判定完成：管控項目 ${sum(0)}，安全要求 ${base + sp + cu}`);
+    $('#trace').innerHTML = T.join('');
+    gateConds = [
+      sec ? ['完成專案安全重要性評估', '成員簽署保密協議（NDA）'] : ['必要管控項目完成'],
+      [full && '風險評鑑經資安主管核准', must && '設定安全要求事項', full && '建立文件清冊並完成機密分級'].filter(Boolean),
+      sec ? ['異動申請皆完成安全影響評估', '落實管理／技術／實體控制'] : ['必要管控項目完成'],
+      [full && '完成安全監督及稽核', sec && '成員存取權限審查'].filter(Boolean),
+      [must && '安全要求全數實施並經驗證', sec && '風險皆已處理或核准接受', sec && '稽核發現全數結案', '所有工作完成'].filter(Boolean),
+    ].map((a) => (a.length ? a : ['必要管控項目完成']));
+    showGate(gi);
   };
-  if (reduce) { [...'482913'].forEach((ch, i) => { cells[i].textContent = ch; cells[i].classList.add('fill'); }); note.textContent = '6 位數一次性驗證碼'; } else {
-    let otpTimer = null;
-    new IntersectionObserver((es) => es.forEach((e) => { clearInterval(otpTimer); if (e.isIntersecting) { typeOtp(); otpTimer = setInterval(typeOtp, 5200); } }), { threshold: 0.5 }).observe($('#otp'));
+  const pick = (id, fn) => $(id).addEventListener('click', (e) => { const b = e.target.closest('.opt'); if (!b) return; fn(b.dataset.k); render(); });
+
+  // ── 階段閘門 ──
+  const PH = [['專案起始', '起始 → 規劃'], ['專案規劃', '規劃 → 執行'], ['專案執行', '執行 → 監控'], ['專案監控', '監控 → 結束'], ['專案結束', '結案審查']];
+  const LOCK = '<svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>'; const OPEN = '<svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 017.500-1.900"/></svg>';
+  let gateConds = []; let gi = 0; let gt = null;
+  $('#gates').innerHTML = PH.map(([n, s], i) => `<div class="gate" data-i="${i}"><div class="hex"></div><b>${n}</b><small>${s}</small></div>`).join('');
+  const gates = $$('#gates .gate');
+  function showGate(i) {
+    gi = i;
+    gates.forEach((g, k) => { g.className = `gate ${k < i ? 'done' : k === i ? 'cur' : ''}`; $('.hex', g).innerHTML = k < i ? OPEN : LOCK; });
+    $('#rail').style.setProperty('--p', `${(i / 4) * 100}%`);
+    $('#gateDetail').innerHTML = `<div class="n grad">${i + 1}</div><div><h3>${PH[i][1]}：通過條件</h3><div class="conds">${(gateConds[i] || []).map((c, k) => `<span style="--n:${k}">${esc(c)}</span>`).join('')}</div></div>`;
   }
+  const play = () => { clearInterval(gt); if (!reduce) gt = setInterval(() => showGate((gi + 1) % 5), 3400); };
+  gates.forEach((g) => g.addEventListener('click', () => { showGate(+g.dataset.i); play(); }));
+  new IntersectionObserver((es) => es.forEach((e) => (e.isIntersecting ? play() : clearInterval(gt))), { threshold: 0.2 }).observe($('#flow'));
+
+  pick('#oNature', (k) => { st.nature = k; }); pick('#oCat', (k) => { st.cat = k; });
+  pick('#oSup', (k) => { st.sup.has(k) ? st.sup.delete(k) : st.sup.add(k); }); pick('#oLvl', (k) => { st.lvl = +k; });
+  render();
+
+  // ── 驗證碼動畫 ──
+  const cells = $$('#otp i');
+  const otp = () => { const code = String(Math.floor(100000 + Math.random() * 900000)); cells.forEach((c) => { c.textContent = ''; c.classList.remove('f'); }); [...code].forEach((ch, i) => setTimeout(() => { cells[i].textContent = ch; cells[i].classList.add('f'); }, 400 + i * 230)); };
+  if (reduce) [...'482913'].forEach((ch, i) => { cells[i].textContent = ch; cells[i].classList.add('f'); });
+  else { let ot = null; new IntersectionObserver((es) => es.forEach((e) => { clearInterval(ot); if (e.isIntersecting) { otp(); ot = setInterval(otp, 4200); } }), { threshold: 0.4 }).observe($('#otp')); }
+
+  // ── 系統畫面輪播 ──
+  const SH = [
+    ['dashboard', '管理總覽', '所有專案的進度、燈號、風險與成本一頁看完；專案性質與類別分布同步呈現。'],
+    ['form', '申請專案', '選定專案性質、類別與委外廠商合作型態，系統即決定要帶出的管控項目與安全要求。'],
+    ['phases', '階段管控', '審查前先列出尚未完成的必要事項；標示「系統判定」的安全項目依實際紀錄自動判定。'],
+    ['risks', '風險評鑑', '風險矩陣、處理計畫、負責人、期限、殘餘風險與核准狀態集中在同一個畫面。'],
+    ['reqs', '安全要求事項', '委外供應商、客戶合約、AI 與產品網路安全的專屬要求，逐項標示對應條款、負責人與驗證狀態。'],
+    ['gantt', '進度甘特圖', '工作分解、里程碑與今日線一目了然；清單、看板、甘特圖三種檢視隨時切換。'],
+    ['reports', '成本與效率', '預算、實際成本、實獲值、SPI／CPI 與完工估算，以及人員準時率與工時效率。'],
+    ['config', '制度維護', '專案性質、類別、五階段管控內容皆可由管理員調整，不必修改程式。'],
+  ];
+  $('#shotbox').innerHTML = SH.map(([f, t], i) => `<img src="img/${f}.jpg" alt="${t}畫面" ${i ? 'loading="lazy"' : ''} width="1980" height="1200">`).join('');
+  $('#tabs').innerHTML = SH.map(([, t], i) => `<button type="button" role="tab" data-i="${i}">${t}</button>`).join('');
+  const imgs = $$('#shotbox img'); const tabs = $$('#tabs button'); let si = 0; let stm = null;
+  const showShot = (i) => { si = i; imgs.forEach((m, k) => m.classList.toggle('on', k === i)); tabs.forEach((b, k) => { b.classList.remove('on'); if (k === i) { void b.offsetWidth; b.classList.add('on'); } b.setAttribute('aria-selected', k === i); });
+    $('#shotTitle').textContent = `專案安全管理系統 ／ ${SH[i][1]}`; $('#cap').innerHTML = `<b>${SH[i][1]}</b>${SH[i][2]}`; };
+  const rot = () => { clearInterval(stm); if (!reduce) stm = setInterval(() => showShot((si + 1) % SH.length), 6000); };
+  tabs.forEach((b) => b.addEventListener('click', () => { showShot(+b.dataset.i); rot(); }));
+  showShot(0);
+  new IntersectionObserver((es) => es.forEach((e) => (e.isIntersecting ? rot() : clearInterval(stm))), { threshold: 0.2 }).observe($('#screens'));
 })();
 </script>
 </body>
