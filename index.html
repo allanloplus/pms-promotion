@@ -9,6 +9,7 @@
 <meta property="og:title" content="米數資科｜以ISMS為基礎的專案安全管理系統">
 <meta property="og:description" content="專案一立案，資安要求自動到位。">
 <meta property="og:image" content="img/dashboard.jpg">
+<meta property="og:url" content="https://pms.medsigtw.com/">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <style>
 :root {
@@ -202,6 +203,14 @@ nav .cta { padding: 7px 16px; border-radius: 9px; font-size: 14px; font-weight: 
 .holo .ph { position: absolute; right: -34px; bottom: 12px; width: 168px; border-radius: 26px; border: 6px solid #0b1626; overflow: hidden; box-shadow: 0 0 50px rgba(139, 92, 246, .45), 0 30px 60px rgba(0, 0, 0, .6); animation: floaty 6s ease-in-out infinite; z-index: 2; }
 @keyframes floaty { 50% { transform: translateY(-14px); } }
 
+.tour { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; padding: 40px; overflow: hidden; }
+.tour .lead { font-size: 16px; } .tour .acts { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 26px; }
+.steps { list-style: none; margin: 22px 0 0; padding: 0; display: grid; gap: 12px; }
+.steps li { display: flex; gap: 14px; align-items: baseline; color: var(--mut); font-size: 15px; } .steps b { font-size: 13px; letter-spacing: 1px; color: var(--cy); flex: none; } .steps strong { color: var(--tx); }
+.tourshot { position: relative; display: block; border-radius: 14px; overflow: hidden; border: 1px solid rgba(34, 211, 238, .45); box-shadow: 0 0 70px rgba(34, 211, 238, .2), 0 30px 70px rgba(0, 0, 0, .5); transform: perspective(1400px) rotateY(-6deg); transition: transform .5s, box-shadow .5s; }
+.tourshot:hover { transform: perspective(1400px) rotateY(0deg) scale(1.02); box-shadow: 0 0 100px rgba(139, 92, 246, .35), 0 30px 70px rgba(0, 0, 0, .5); }
+.tourshot .url { position: absolute; left: 14px; bottom: 14px; display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 30px; background: rgba(5, 10, 19, .82); border: 1px solid var(--line); font-size: 13px; color: #cfeaf6; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+.tourshot .url i { width: 8px; height: 8px; border-radius: 50%; background: var(--gr); animation: ping 1.8s infinite; }
 /* 數字 */
 .nums { display: grid; grid-template-columns: repeat(7, 1fr); gap: 14px; text-align: center; }
 .nums div { padding: 22px 8px; } .nums b { display: block; font-size: clamp(34px, 4.6vw, 52px); line-height: 1.1; font-variant-numeric: tabular-nums; } .nums span { color: var(--mut); font-size: 14px; }
@@ -220,7 +229,7 @@ footer { border-top: 1px solid var(--line); color: var(--dim); font-size: 13px; 
   .bento { grid-template-columns: 1fr 1fr; } .s2, .s3, .s4 { grid-column: span 2; }
   .holo .ph { display: none; } .holo .frame { transform: none; }
   .nums { grid-template-columns: repeat(4, 1fr); }
-  .glob { grid-template-columns: 1fr; } .glob .holo .frame { transform: none; }
+  .glob { grid-template-columns: 1fr; } .tour { grid-template-columns: 1fr; padding: 26px 20px; gap: 26px; } .tourshot { transform: none; } .glob .holo .frame { transform: none; }
 }
 @media (max-width: 560px) {
   .opts.c3 { grid-template-columns: 1fr; } .kp { gap: 8px; } .k { padding: 11px 12px; }
@@ -238,8 +247,8 @@ footer { border-top: 1px solid var(--line); color: var(--dim); font-size: 13px; 
 
 <nav id="nav"><div class="wrap">
   <a class="logo" href="#top"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3l11 4.200v8.300c0 6.800-4.600 11.900-11 14.200C9.600 27.400 5 22.300 5 15.500V7.200z" fill="#22d3ee"/><path d="M10.800 16.300l3.700 3.700 6.900-7.400" fill="none" stroke="#050a13" stroke-width="2.600" stroke-linecap="round" stroke-linejoin="round"/></svg>米數資科</a>
-  <ul><li><a href="#engine">判定引擎</a></li><li><a href="#flow">階段閘門</a></li><li><a href="#global">多國語言</a></li><li><a href="#features">產品特色</a></li><li><a href="#screens">系統畫面</a></li></ul>
-  <a class="cta" href="#contact">預約展示</a>
+  <ul><li><a href="#engine">判定引擎</a></li><li><a href="#flow">階段閘門</a></li><li><a href="#global">多國語言</a></li><li><a href="#features">產品特色</a></li><li><a href="#screens">系統畫面</a></li><li><a href="#tour">線上參觀</a></li></ul>
+  <a class="cta" href="https://pms.medsigtw.com/" target="_blank" rel="noopener">進入系統</a>
 </div></nav>
 
 <header class="hero" id="top">
@@ -250,7 +259,7 @@ footer { border-top: 1px solid var(--line); color: var(--dim); font-size: 13px; 
       <h1>專案一立案<br><span class="grad">資安要求自動到位</span></h1>
       <p class="sub">告訴系統這是什麼專案、有沒有委外廠商、對象是不是客戶，它就依貴公司的制度帶出階段管控、風險評鑑與安全要求事項，並在每一道階段審查把關。</p>
       <div class="typed mono" id="typed" aria-hidden="true"></div>
-      <div class="acts"><a class="btn pri" href="#engine">親手試試判定引擎</a><a class="btn ghost" href="#contact">預約產品展示</a></div>
+      <div class="acts"><a class="btn pri" href="#engine">親手試試判定引擎</a><a class="btn ghost" href="https://pms.medsigtw.com/" target="_blank" rel="noopener">進入線上系統 ↗</a></div>
     </div>
     <div class="core" aria-hidden="true">
       <div class="ring" style="--i:0%;--t:38s"></div><div class="ring" style="--i:11%;--t:27s"></div><div class="ring" style="--i:21%;--t:19s"></div>
@@ -385,17 +394,32 @@ footer { border-top: 1px solid var(--line); color: var(--dim); font-size: 13px; 
   <div class="rv" style="--d:.36s"><b class="grad" data-n="4">0</b><span>介面語言</span></div>
 </div></div></section>
 
+<section id="tour" style="padding:70px 0"><div class="wrap"><div class="tour glass rv">
+  <div>
+    <span class="eyebrow">Live System</span>
+    <h2>系統已上線，<span class="grad">歡迎親自走一遍</span></h2>
+    <p class="lead">線上系統備有完整的範例專案，四種語言皆可切換。參觀帳號為唯讀，可放心瀏覽每一個畫面。</p>
+    <ol class="steps">
+      <li><b>01</b><span>開啟線上系統，按登入頁的<strong>「系統參觀申請」</strong></span></li>
+      <li><b>02</b><span>填寫 e-mail、申請人與公司後送出</span></li>
+      <li><b>03</b><span>我們確認後以 e-mail 回覆參觀帳號，輸入即可進入（免驗證碼）</span></li>
+    </ol>
+    <div class="acts"><a class="btn pri" href="https://pms.medsigtw.com/" target="_blank" rel="noopener">前往 pms.medsigtw.com ↗</a><a class="btn ghost" href="#contact">直接與我們聯絡</a></div>
+  </div>
+  <a class="tourshot" href="https://pms.medsigtw.com/" target="_blank" rel="noopener" aria-label="開啟線上系統"><img src="img/login.jpg" alt="線上系統登入畫面" loading="lazy" width="1980" height="1200"><span class="url mono"><i></i>pms.medsigtw.com</span></a>
+</div></div></section>
+
 <section class="final" id="contact"><div class="wrap">
   <span class="eyebrow rv" style="justify-content:center">Get Started</span>
   <h2 class="rv">讓每一個專案，<span class="grad">從第一天就把資安管進流程</span></h2>
-  <p class="rv">可部署於貴公司自有主機，資料留在自己手上。歡迎與我們聯絡，安排產品展示或討論貴公司的專案安全管理制度。</p>
-  <div class="acts rv"><a class="btn pri" href="mailto:isms@medsigtw.com?subject=%E5%B0%88%E6%A1%88%E5%AE%89%E5%85%A8%E7%AE%A1%E7%90%86%E7%B3%BB%E7%B5%B1%E5%B1%95%E7%A4%BA%E9%A0%90%E7%B4%84">isms@medsigtw.com</a><a class="btn ghost" href="https://www.medsigtw.com/" target="_blank" rel="noopener">米數資科官方網站</a></div>
+  <p class="rv">可部署於貴公司自有主機或雲端主機，資料留在自己手上。歡迎與我們聯絡，安排產品展示或討論貴公司的專案安全管理制度。</p>
+  <div class="acts rv"><a class="btn pri" href="mailto:isms@medsigtw.com?subject=%E5%B0%88%E6%A1%88%E5%AE%89%E5%85%A8%E7%AE%A1%E7%90%86%E7%B3%BB%E7%B5%B1%E5%B1%95%E7%A4%BA%E9%A0%90%E7%B4%84">isms@medsigtw.com</a><a class="btn ghost" href="https://pms.medsigtw.com/" target="_blank" rel="noopener">線上系統 pms.medsigtw.com</a><a class="btn ghost" href="https://www.medsigtw.com/" target="_blank" rel="noopener">米數資科官方網站</a></div>
 </div></section>
 
 <footer><div class="wrap">
   米數資科－以ISMS為基礎的專案安全管理系統<br>
   對應 資訊安全 ISO 27001／TISAX．個資保護 ISO 27701．人工智慧 ISO 42001．IEC 62443．ISO/SAE 21434 之專案安全要求<br>
-  系統開發：<a href="https://www.medsigtw.com/" target="_blank" rel="noopener">https://www.medsigtw.com/</a>　技術支援：<a href="mailto:isms@medsigtw.com">isms@medsigtw.com</a><br>
+  線上系統：<a href="https://pms.medsigtw.com/" target="_blank" rel="noopener">https://pms.medsigtw.com/</a>　系統開發：<a href="https://www.medsigtw.com/" target="_blank" rel="noopener">https://www.medsigtw.com/</a>　技術支援：<a href="mailto:isms@medsigtw.com">isms@medsigtw.com</a><br>
   <span style="font-size:12px">畫面中之專案與人員均為示範資料。本系統以規則協助落實各標準之專案安全要求，不代表取得該等標準之驗證。</span>
 </div></footer>
 
@@ -547,6 +571,7 @@ footer { border-top: 1px solid var(--line); color: var(--dim); font-size: 13px; 
 
   // ── 系統畫面輪播 ──
   const SH = [
+    ['login', '登入', '無密碼登入：以 e-mail 收取一次性驗證碼；登入頁可切換四種語言，並提供系統參觀申請。'],
     ['dashboard', '管理總覽', '所有專案的進度、燈號、風險與成本一頁看完；專案性質與類別分布同步呈現。'],
     ['form', '申請專案', '選定專案性質、類別與委外廠商合作型態，系統即決定要帶出的管控項目與安全要求。'],
     ['phases', '階段管控', '審查前先列出尚未完成的必要事項；標示「系統判定」的安全項目依實際紀錄自動判定。'],
