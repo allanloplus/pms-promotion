@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>米數資科｜以ISMS為基礎的專案安全管理系統</title>
-<meta name="description" content="專案一立案，資安要求自動到位。依專案性質、類別與委外型態，自動帶出階段管控、風險評鑑與安全要求事項，並以階段審查把關。對應 ISO 27001、TISAX、ISO 27701、ISO 42001、IEC 62443、ISO/SAE 21434 之專案安全要求。">
+<meta name="description" content="專案一立案，資安要求自動到位。依專案性質、類別與委外型態，自動帶出階段管控、風險評鑑與安全要求事項，並以階段審查把關。繁體中文、简体中文、English、Español 四種語言，跨國據點共用一套制度。對應 ISO 27001、TISAX、ISO 27701、ISO 42001、IEC 62443、ISO/SAE 21434 之專案安全要求。">
 <meta name="theme-color" content="#050a13">
 <meta property="og:title" content="米數資科｜以ISMS為基礎的專案安全管理系統">
 <meta property="og:description" content="專案一立案，資安要求自動到位。">
@@ -172,7 +172,17 @@ nav .cta { padding: 7px 16px; border-radius: 9px; font-size: 14px; font-weight: 
 @keyframes up { to { transform: translateY(-50%); } }
 .bars { display: flex; align-items: flex-end; gap: 7px; height: 78px; } .bars i { flex: 1; border-radius: 4px 4px 0 0; background: linear-gradient(to top, rgba(34, 211, 238, .25), var(--cy)); height: var(--h); transform-origin: bottom; animation: grow 3s ease-in-out infinite alternate; animation-delay: var(--dl); } .bars i.o { background: linear-gradient(to top, rgba(251, 113, 133, .25), var(--rd)); }
 @keyframes grow { from { transform: scaleY(.55); } }
-.roles { display: flex; gap: 8px; flex-wrap: wrap; } .roles span { font-size: 13px; padding: 5px 12px; border-radius: 9px; border: 1px solid var(--line); color: #cfe0f2; } .roles span b { color: var(--cy); margin-right: 5px; }
+.hello { position: relative; height: 40px; } .hello span { position: absolute; left: 0; bottom: 0; font-size: 21px; font-weight: 800; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; opacity: 0; animation: hello 10s infinite; animation-delay: calc(var(--n) * 2.5s); white-space: nowrap; }
+@keyframes hello { 0% { opacity: 0; transform: translateY(12px); filter: blur(6px); } 4%, 22% { opacity: 1; transform: none; filter: none; } 26%, 100% { opacity: 0; transform: translateY(-12px); filter: blur(6px); } }
+.glob { display: grid; grid-template-columns: .82fr 1.18fr; gap: 34px; align-items: center; margin-top: 46px; }
+.glob .holo { max-width: none; margin: 0; } .glob .holo .frame { transform: rotateY(-7deg) rotateX(2deg); transform-origin: 100% 50%; }
+.langs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+.langs button { padding: 9px 18px; border-radius: 12px; border: 1px solid var(--line); background: rgba(255, 255, 255, .03); font-size: 15.5px; font-weight: 700; color: var(--mut); position: relative; overflow: hidden; transition: all .25s; }
+.langs button.on { color: #fff; border-color: var(--cy); background: linear-gradient(135deg, rgba(34, 211, 238, .18), rgba(139, 92, 246, .16)); box-shadow: 0 0 24px rgba(34, 211, 238, .28); }
+.langs button.on::after { content: ""; position: absolute; left: 0; bottom: 0; height: 2px; background: var(--grad); animation: prog 3.6s linear forwards; }
+.gpts { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; } .gpts li { padding-left: 18px; border-left: 2px solid rgba(34, 211, 238, .45); color: var(--mut); font-size: 15px; line-height: 1.7; } .gpts b { display: block; color: var(--tx); font-size: 16.5px; }
+.sites { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; } .sites span { display: inline-flex; align-items: center; gap: 8px; padding: 6px 13px; border-radius: 30px; border: 1px solid var(--line); font-size: 13.5px; background: rgba(5, 10, 19, .5); } .sites small { color: var(--cy); font-size: 12.5px; }
+.sites i { width: 8px; height: 8px; border-radius: 50%; background: var(--gr); animation: ping 2.4s infinite; animation-delay: calc(var(--n) * .6s); }
 
 /* 畫面展示 */
 .tabs { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 40px 0 22px; }
@@ -193,7 +203,7 @@ nav .cta { padding: 7px 16px; border-radius: 9px; font-size: 14px; font-weight: 
 @keyframes floaty { 50% { transform: translateY(-14px); } }
 
 /* 數字 */
-.nums { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; text-align: center; }
+.nums { display: grid; grid-template-columns: repeat(7, 1fr); gap: 14px; text-align: center; }
 .nums div { padding: 22px 8px; } .nums b { display: block; font-size: clamp(34px, 4.6vw, 52px); line-height: 1.1; font-variant-numeric: tabular-nums; } .nums span { color: var(--mut); font-size: 14px; }
 
 /* CTA */
@@ -209,7 +219,8 @@ footer { border-top: 1px solid var(--line); color: var(--dim); font-size: 13px; 
   .gate-detail { grid-template-columns: 1fr; gap: 6px; } .gate-detail .n { text-align: left; font-size: 40px; } .loops { grid-template-columns: 1fr; }
   .bento { grid-template-columns: 1fr 1fr; } .s2, .s3, .s4 { grid-column: span 2; }
   .holo .ph { display: none; } .holo .frame { transform: none; }
-  .nums { grid-template-columns: repeat(3, 1fr); }
+  .nums { grid-template-columns: repeat(4, 1fr); }
+  .glob { grid-template-columns: 1fr; } .glob .holo .frame { transform: none; }
 }
 @media (max-width: 560px) {
   .opts.c3 { grid-template-columns: 1fr; } .kp { gap: 8px; } .k { padding: 11px 12px; }
@@ -219,7 +230,7 @@ footer { border-top: 1px solid var(--line); color: var(--dim); font-size: 13px; 
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
-  .rv, .trace div, .conds span { opacity: 1; transform: none; } html { scroll-behavior: auto; } .rail i { display: none; }
+  .rv, .trace div, .conds span { opacity: 1; transform: none; } .hello span:first-child { opacity: 1; } html { scroll-behavior: auto; } .rail i { display: none; }
 }
 </style>
 </head>
@@ -227,7 +238,7 @@ footer { border-top: 1px solid var(--line); color: var(--dim); font-size: 13px; 
 
 <nav id="nav"><div class="wrap">
   <a class="logo" href="#top"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3l11 4.200v8.300c0 6.800-4.600 11.900-11 14.200C9.600 27.400 5 22.300 5 15.500V7.200z" fill="#22d3ee"/><path d="M10.800 16.300l3.700 3.700 6.900-7.400" fill="none" stroke="#050a13" stroke-width="2.600" stroke-linecap="round" stroke-linejoin="round"/></svg>米數資科</a>
-  <ul><li><a href="#engine">判定引擎</a></li><li><a href="#flow">階段閘門</a></li><li><a href="#features">產品特色</a></li><li><a href="#screens">系統畫面</a></li></ul>
+  <ul><li><a href="#engine">判定引擎</a></li><li><a href="#flow">階段閘門</a></li><li><a href="#global">多國語言</a></li><li><a href="#features">產品特色</a></li><li><a href="#screens">系統畫面</a></li></ul>
   <a class="cta" href="#contact">預約展示</a>
 </div></nav>
 
@@ -295,6 +306,28 @@ footer { border-top: 1px solid var(--line); color: var(--dim); font-size: 13px; 
   </div>
 </div></section>
 
+<section id="global"><div class="wrap">
+  <div class="center"><span class="eyebrow rv">Global Ready</span>
+  <h2 class="rv">一套制度，<span class="grad">每個據點都用自己的語言</span></h2>
+  <p class="lead rv">台灣總部訂定的專案安全制度，中國、墨西哥、歐洲的同仁打開就是熟悉的語言：不只是選單，連五階段管控項目、風險評鑑方法與安全要求事項都一併轉換。</p></div>
+  <div class="glob">
+    <div class="rv">
+      <div class="langs" id="langs" role="tablist"></div>
+      <ul class="gpts">
+        <li><b>依帳號預設語言</b>登入後自動以該帳號的語言顯示；自己切換一次，下次登入就記得。</li>
+        <li><b>通知信跟著收件者</b>登入驗證碼、工作指派、審查通知，以每位收件者的語言寄出。</li>
+        <li><b>制度內容已翻譯</b>系統預設的專案性質與類別、管控項目、威脅情境與 63 項安全要求事項，四種語言皆備。</li>
+        <li><b>稽核時說同一種話</b>各據點看到的是同一份管控清單與同一筆紀錄，只是語言不同。</li>
+      </ul>
+      <div class="sites" aria-hidden="true"><span style="--n:0"><i></i>台灣<small>繁體中文</small></span><span style="--n:1"><i></i>中國<small>简体中文</small></span><span style="--n:2"><i></i>墨西哥<small>Español</small></span><span style="--n:3"><i></i>歐洲據點<small>English</small></span></div>
+    </div>
+    <div class="holo rv" style="--d:.1s">
+      <div class="frame"><div class="bar"><i></i><i></i><i></i><span id="langTitle"></span></div><div class="shotbox" id="langbox"></div></div>
+    </div>
+  </div>
+  <p class="note center rv">專案名稱、工作內容等由使用者輸入的資料，以及貴公司自行修改的制度內容，會以輸入時的文字呈現。</p>
+</div></section>
+
 <section id="features"><div class="wrap">
   <div class="center"><span class="eyebrow rv">Capabilities</span>
   <h2 class="rv">專案管理該有的，<span class="grad">資安要求該管的</span></h2></div>
@@ -317,9 +350,9 @@ footer { border-top: 1px solid var(--line); color: var(--dim); font-size: 13px; 
     <div class="card glass s2 rv" style="--glow:rgba(34,211,238,.2)"><h3>無密碼登入，不怕被鎖在門外</h3>
       <p>e-mail 一次性驗證碼，沒有密碼可外洩。備援郵件伺服器自動切換；郵件全面失效時，另有留存稽核軌跡的緊急程序。</p>
       <div class="viz otp" id="otp"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
-    <div class="card glass s2 rv" style="--d:.08s;--glow:rgba(139,92,246,.22)"><span class="new">NEW</span><h3>客戶試用與參觀帳號</h3>
-      <p>提供客戶試用時，只看得到自己的專案；單一「測試負責人」即可走完全部流程。參觀帳號則完全唯讀。</p>
-      <div class="viz roles"><span><b>◆</b>正式帳號</span><span><b>◆</b>客戶測試</span><span><b>◆</b>參觀（唯讀）</span></div></div>
+    <div class="card glass s2 rv" style="--d:.08s;--glow:rgba(139,92,246,.22)"><span class="new">NEW</span><h3>四種語言，同一套制度</h3>
+      <p>繁體中文、简体中文、English、Español 隨時切換；每個帳號有自己的預設語言，通知信也用收件者的語言寄出。</p>
+      <div class="viz hello" aria-hidden="true"><span style="--n:0">專案安全</span><span style="--n:1">项目安全</span><span style="--n:2">Project Security</span><span style="--n:3">Seguridad del proyecto</span></div></div>
     <div class="card glass s2 rv" style="--d:.16s;--glow:rgba(251,191,36,.18)"><h3>進度、成本與效率</h3>
       <p>清單、看板、甘特圖三種檢視；實獲值 SPI／CPI、完工估算、人員準時率與工時效率，紅黃綠燈號一眼掌握。</p>
       <div class="viz bars"><i style="--h:46%;--dl:0s"></i><i style="--h:68%;--dl:-.4s"></i><i style="--h:58%;--dl:-.8s"></i><i class="o" style="--h:92%;--dl:-1.2s"></i><i style="--h:74%;--dl:-1.6s"></i><i style="--h:84%;--dl:-2s"></i><i style="--h:62%;--dl:-2.4s"></i></div></div>
@@ -349,6 +382,7 @@ footer { border-top: 1px solid var(--line); color: var(--dim); font-size: 13px; 
   <div class="rv" style="--d:.18s"><b class="grad" data-n="9">0</b><span>重要性評估構面</span></div>
   <div class="rv" style="--d:.24s"><b class="grad" data-n="63">0</b><span>安全要求事項</span></div>
   <div class="rv" style="--d:.3s"><b class="grad" data-n="25">0</b><span>威脅情境</span></div>
+  <div class="rv" style="--d:.36s"><b class="grad" data-n="4">0</b><span>介面語言</span></div>
 </div></div></section>
 
 <section class="final" id="contact"><div class="wrap">
@@ -418,7 +452,7 @@ footer { border-top: 1px solid var(--line); color: var(--dim); font-size: 13px; 
   if (reduce) { draw(); cancelAnimationFrame(raf); } else new IntersectionObserver((es) => es.forEach((e) => { cancelAnimationFrame(raf); if (e.isIntersecting) draw(); })).observe(cv);
 
   // ── 打字機 ──
-  const lines = ['> 性質：客戶專案　→ 強制安全管理', '> 委外：機密資料往來　→ 加入供應商安全要求', '> 重要性：高　→ 須完成風險評鑑並經核准', '> 階段審查：條件未成立　→ 無法進入執行階段'];
+  const lines = ['> 性質：客戶專案　→ 強制安全管理', '> 委外：機密資料往來　→ 加入供應商安全要求', '> 重要性：高　→ 須完成風險評鑑並經核准', '> 階段審查：條件未成立　→ 無法進入執行階段', '> 帳號語言：Español　→ 介面與通知信自動切換'];
   const ty = $('#typed');
   if (reduce) ty.textContent = lines[0]; else { let li = 0; let ci = 0; let del = false;
     const tick = () => { const s = lines[li]; ty.textContent = s.slice(0, ci); if (!del && ci < s.length) { ci++; setTimeout(tick, 42); } else if (!del) { del = true; setTimeout(tick, 1900); } else if (ci > 0) { ci -= 2; if (ci < 0) ci = 0; setTimeout(tick, 16); } else { del = false; li = (li + 1) % lines.length; setTimeout(tick, 300); } };
@@ -499,6 +533,17 @@ footer { border-top: 1px solid var(--line); color: var(--dim); font-size: 13px; 
   const otp = () => { const code = String(Math.floor(100000 + Math.random() * 900000)); cells.forEach((c) => { c.textContent = ''; c.classList.remove('f'); }); [...code].forEach((ch, i) => setTimeout(() => { cells[i].textContent = ch; cells[i].classList.add('f'); }, 400 + i * 230)); };
   if (reduce) [...'482913'].forEach((ch, i) => { cells[i].textContent = ch; cells[i].classList.add('f'); });
   else { let ot = null; new IntersectionObserver((es) => es.forEach((e) => { clearInterval(ot); if (e.isIntersecting) { otp(); ot = setInterval(otp, 4200); } }), { threshold: 0.4 }).observe($('#otp')); }
+
+  // ── 多國語言：同一畫面、四種語言 ──
+  const LG = [['zh-TW', '繁體中文', '專案安全管理系統 ／ 安全要求事項'], ['zh-CN', '简体中文', '项目安全管理系统 ／ 安全要求事项'], ['en', 'English', 'Project Security Management ／ Security Requirements'], ['es', 'Español', 'Gestión de seguridad del proyecto ／ Requisitos de seguridad']];
+  $('#langbox').innerHTML = LG.map(([k, n]) => `<img src="img/lang-${k}.jpg" alt="${n} 介面：安全要求事項畫面" loading="lazy" width="1980" height="1200">`).join('');
+  $('#langs').innerHTML = LG.map(([, n], i) => `<button type="button" role="tab" data-i="${i}">${n}</button>`).join('');
+  const lImgs = $$('#langbox img'); const lTabs = $$('#langs button'); let lgi = 0; let lgt = null;
+  const showLang = (i) => { lgi = i; lImgs.forEach((m, k) => m.classList.toggle('on', k === i)); lTabs.forEach((b, k) => { b.classList.remove('on'); if (k === i) { void b.offsetWidth; b.classList.add('on'); } b.setAttribute('aria-selected', k === i); }); $('#langTitle').textContent = LG[i][2]; };
+  const lrot = () => { clearInterval(lgt); if (!reduce) lgt = setInterval(() => showLang((lgi + 1) % LG.length), 3600); };
+  lTabs.forEach((b) => b.addEventListener('click', () => { showLang(+b.dataset.i); lrot(); }));
+  showLang(0);
+  new IntersectionObserver((es) => es.forEach((e) => (e.isIntersecting ? lrot() : clearInterval(lgt))), { threshold: 0.2 }).observe($('#global'));
 
   // ── 系統畫面輪播 ──
   const SH = [
