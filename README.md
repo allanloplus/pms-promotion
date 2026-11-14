@@ -5,6 +5,7 @@
 - `index.html`：單一頁面，樣式與動畫皆內嵌，不載入任何外部資源或追蹤碼
 - `img/`：系統畫面截圖（取自示範資料）
 - `favicon.svg`：網站圖示
+- `course/`：系統線上課程（動畫教學）：線上互動教材版 `course/index.html`、線上課程教學影音版 `course/play.html`、課後測驗與通過證書。說明見 [`course/README.md`](course/README.md)
 
 ## 發佈
 
