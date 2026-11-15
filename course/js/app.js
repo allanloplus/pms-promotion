@@ -11,7 +11,7 @@
     return '<div class="say ' + who + '"><div class="face"><img src="' + CH.face(who, m) + '" alt=""><b>' + CH.CHAR[who].short + '</b></div><div class="bubble" aria-label="' + CH.CHAR[who].name + '">' + html + "</div></div>";
   }
   var TIP = { consult: "顧問實務", audit: "稽核員視角", ng: "常見缺失", key: "重點", op: "操作提示" };
-  var CREDIT = "教材規劃製作：Allan Lo 顧問（http://www.123hi.org）";
+  var CREDIT = "教材規劃製作／系統開發：米數Medsig";
   var COPYRIGHT = "Copyright © 2026 Allan Lo. All rights reserved.";
   var SIGNATURE = "assets/signature.png";
   var COURSE_TITLE = "米數Medsig 以ISMS為基礎的專案安全管理系統 線上課程";
@@ -43,7 +43,11 @@
   function renderSide(current) {
     var html = "", lastPart = "";
     COURSE.forEach(function (c, i) {
-      if (c.part !== lastPart) { html += "<h4>" + esc(c.part) + "</h4>"; lastPart = c.part; }
+      if (c.part !== lastPart) {
+        var pn = c.part.indexOf("第一部分") === 0 ? 1 : c.part.indexOf("第二部分") === 0 ? 2 : c.part.indexOf("第三部分") === 0 ? 3 : 0;
+        html += pn ? '<h4><a class="part-link" href="#part' + pn + '" title="查看本部分介紹">' + esc(c.part) + ' <span>介紹 ›</span></a></h4>' : "<h4>" + esc(c.part) + "</h4>";
+        lastPart = c.part;
+      }
       html += '<button class="nav-item' + (state.done[c.id] ? " done" : "") + '" data-go="c-' + c.id + '" aria-current="' + (current === c.id) + '">' +
         '<span class="dot">' + (state.done[c.id] ? "✓" : "") + "</span><span>" + esc(c.title) + "</span><small>" + c.mins + "′</small></button>";
     });
@@ -73,7 +77,9 @@
     var h = (location.hash || "#home").slice(1);
     if (h.indexOf("c-") === 0 && chapterIndex(h.slice(2)) >= 0) renderChapter(h.slice(2));
     else if (h === "quiz") renderQuiz();
+    else if (/^part[123]$/.test(h)) { renderHome(); var pc = document.getElementById(h); if (pc) { pc.classList.add("focus"); pc.scrollIntoView({ block: "start" }); } markPart(h.slice(4)); return; }
     else renderHome();
+    markPart(null);
     window.scrollTo(0, 0);
   }
   window.addEventListener("hashchange", route_);
@@ -91,12 +97,15 @@
       desc: "以實際操作畫面示範三個案例，<b>從專案建立、過程到結案</b>如何在系統上實現。",
       pts: ["研發專案：車載 T-Box（須風險評鑑）", "資訊專案：EDMS 系統建置（須風險評鑑）", "流程再造專案：P2P（免風險評鑑的代表案例）", "登入、角色權限與日常操作"] }
   ];
+  function markPart(n) {
+    document.querySelectorAll(".partnav a").forEach(function (x) { x.classList.toggle("on", x.getAttribute("data-part") === n); });
+  }
   function partsHTML() {
     var cards = PARTS.map(function (P, i) {
       var cs = COURSE.filter(function (c) { return c.part.indexOf(P.key) === 0; });
       var mins = cs.reduce(function (s, c) { return s + c.mins; }, 0);
       var done = cs.filter(function (c) { return state.done[c.id]; }).length;
-      return '<article class="part-card p' + (i + 1) + '">' +
+      return '<article class="part-card p' + (i + 1) + '" id="part' + (i + 1) + '">' +
         '<header><span class="part-no">0' + (i + 1) + '</span><span class="part-key">' + P.key + "</span></header>" +
         "<h3>" + P.name + "</h3>" +
         '<div class="part-meta"><span>' + cs.length + " 個單元</span><span>約 " + mins + " 分鐘</span>" + (done ? "<span>已讀 " + done + "／" + cs.length + "</span>" : "") + "</div>" +
@@ -195,6 +204,7 @@
   var checks = {};
   function renderChapter(id) {
     var i = chapterIndex(id), c = COURSE[i];
+    setTimeout(function () { markPart((c.part.match(/^第(一|二|三)部分/) || [])[1] ? String("一二三".indexOf(c.part[1]) + 1) : null); }, 0);
     renderSide(id);
     checks = {};
     var toc = c.sections.map(function (s, k) { return '<a href="#c-' + id + '" data-sec="s' + k + '">' + esc(s.h) + "</a>"; }).join("");
