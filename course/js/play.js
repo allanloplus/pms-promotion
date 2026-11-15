@@ -489,12 +489,34 @@
       return '<button class="tline ' + s.who + '" data-k="' + k + '"><span class="tw">' + (s.who === "A" ? "Allan" : "阿拉蕾") + "</span><span>" + esc(txt) + "</span></button>";
     }).join("");
   }
+  /* 章節選擇：上方的三大部分分頁＋單元下拉選單，下方為完整單元清單 */
+  var PARTS = [["開場", "開場"], ["第一部分", "① 系統特色"], ["第二部分", "② 合規對應"], ["第三部分", "③ 系統操作"], ["結語", "結語"]];
+  function partOf(c) { for (var k = 0; k < PARTS.length; k++) if (c.part.indexOf(PARTS[k][0]) === 0) return k; return 0; }
   function renderChapters() {
     var done = (load(STORE, { done: {} }).done) || {};
-    $("chapList").innerHTML = COURSE.map(function (c, i) {
-      return '<button class="nav-item' + (done[c.id] ? " done" : "") + '" data-ch="' + i + '" aria-current="' + (i === S.ch) + '"><span class="dot">' + (done[c.id] ? "✓" : "") + "</span><span>" + esc(c.title) + "</span><small>" + (i + 1) + "</small></button>";
+    var cur = partOf(COURSE[S.ch]);
+    $("partTabs").innerHTML = PARTS.map(function (p, k) {
+      var first = COURSE.findIndex(function (c) { return partOf(c) === k; });
+      var n = COURSE.filter(function (c) { return partOf(c) === k; }).length;
+      return '<button class="ptab' + (k === cur ? " on" : "") + '" role="tab" aria-selected="' + (k === cur) + '" data-ch="' + first + '">' + esc(p[1]) + (n > 1 ? "<small>" + n + " 單元</small>" : "") + "</button>";
     }).join("");
+    var html = "", last = -1;
+    COURSE.forEach(function (c, i) {
+      var k = partOf(c);
+      if (k !== last) { if (last >= 0) html += "</optgroup>"; html += '<optgroup label="' + esc(PARTS[k][1]) + '">'; last = k; }
+      html += '<option value="' + i + '"' + (i === S.ch ? " selected" : "") + ">" + (done[c.id] ? "✓ " : "") + (i + 1) + ". " + esc(c.title) + "</option>";
+    });
+    $("chapSelect").innerHTML = html + "</optgroup>";
+    var list = "", lp = -1;
+    COURSE.forEach(function (c, i) {
+      var k = partOf(c);
+      if (k !== lp) { list += '<h4 class="cl-part">' + esc(PARTS[k][1]) + "</h4>"; lp = k; }
+      list += '<button class="nav-item' + (done[c.id] ? " done" : "") + '" data-ch="' + i + '" aria-current="' + (i === S.ch) + '"><span class="dot">' + (done[c.id] ? "✓" : "") + "</span><span>" + esc(c.title) + "</span><small>" + (i + 1) + "</small></button>";
+    });
+    $("chapList").innerHTML = list;
+    document.querySelectorAll(".partnav a").forEach(function (x) { x.classList.toggle("on", +x.getAttribute("data-part") === cur); });
   }
+  $("chapSelect").addEventListener("change", function () { loadChapter(+this.value, 0, S.started); });
 
   function openZoom(html) {
     var box = document.createElement("div");

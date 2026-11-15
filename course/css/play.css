@@ -17,7 +17,7 @@
 :root[data-theme="dark"] { --wall: #1c2027; --floor: #2a2f38; }
 
 .play-main { padding-inline: 16px; padding-block: 20px 60px; }
-.play-wrap { max-width: 1180px; margin: 0 auto; display: grid; gap: 16px; }
+.play-wrap { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
 .play-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 16px; }
 .play-head h1 { font-size: clamp(1.3rem, 2.6vw, 1.8rem); }
 .play-head .eyebrow { margin-bottom: 4px; }
@@ -238,3 +238,20 @@
 .board:has(.bshot) { padding: 10px 14px; height: 470px; }
 @media (max-width: 760px) { .board:has(.bshot) { height: 340px; padding: 8px; } .board .cam img { max-height: 250px; } }
 @media (prefers-reduced-motion: reduce) { .board .cam { transition: none; } .board .mk.now { animation: none; } }
+
+/* ---------- 上方章節選擇列 ---------- */
+.chap-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px; padding: 10px 12px; background: var(--surface); border: 2px solid var(--ink); border-radius: 12px; }
+.part-tabs { display: flex; flex-wrap: wrap; gap: 6px; }
+.ptab { display: inline-flex; align-items: baseline; gap: 6px; padding: 7px 14px; border-radius: 99px; border: 1.5px solid var(--rule); background: var(--paper); color: var(--ink); font: inherit; font-weight: 700; font-size: .95rem; cursor: pointer; }
+.ptab small { font-weight: 500; font-size: .75rem; color: var(--muted); }
+.ptab:hover { border-color: var(--seal); }
+.ptab.on { background: var(--seal); border-color: var(--seal); color: #fff; }
+.ptab.on small { color: rgba(255,255,255,.85); }
+.chap-pick { display: flex; align-items: center; gap: 8px; min-width: 0; flex: 1 1 280px; max-width: 460px; }
+.chap-pick span { font-size: .85rem; font-weight: 700; color: var(--muted); white-space: nowrap; }
+.chap-pick select { flex: 1; min-width: 0; font: inherit; font-size: .95rem; padding: 7px 10px; border-radius: 8px; border: 1.5px solid var(--ink); background: var(--surface); color: var(--ink); }
+.cl-part { margin: 12px 4px 4px; font-size: .78rem; letter-spacing: .1em; color: var(--seal); }
+.cl-part:first-child { margin-top: 0; }
+@media (max-width: 720px) { .ptab { padding: 6px 10px; font-size: .88rem; } .ptab small { display: none; } .chap-pick { max-width: none; } }
+.chap-bar, .play-head { min-width: 0; }
+.chap-pick select { width: 100%; }

@@ -386,3 +386,21 @@ h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; line-height: 
 @media (max-width: 1100px) { .notes-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 960px) { .parts-grid { grid-template-columns: minmax(0, 1fr); } .part-card { padding-bottom: 18px; } }
 @media (max-width: 520px) { .notes-grid { grid-template-columns: minmax(0, 1fr); } .part-card h3 { font-size: 1.25rem; } }
+
+/* ---------- 頂部：三大部分快速連結 ---------- */
+.partnav { display: flex; gap: 4px; margin-left: 12px; }
+.partnav a { display: inline-flex; align-items: center; gap: 4px; padding: 6px 12px; border-radius: 99px; font-size: .9rem; font-weight: 700; color: var(--ink); text-decoration: none; border: 1.5px solid transparent; white-space: nowrap; }
+.partnav a b { color: var(--seal); }
+.partnav a:hover { border-color: var(--rule); background: var(--paper); }
+.partnav a.on { background: var(--seal-soft); border-color: var(--seal); }
+@media (max-width: 1100px) { .brand span { display: none; } }
+@media (max-width: 860px) { .partnav { display: none; } }
+.side h4 .part-link { display: flex; justify-content: space-between; align-items: center; color: inherit; text-decoration: none; }
+.side h4 .part-link span { font-size: .72rem; letter-spacing: 0; color: var(--seal); }
+.side h4 .part-link:hover { color: var(--seal); }
+.part-card.focus { outline: 4px solid var(--seal); outline-offset: 4px; }
+.part-card { scroll-margin-top: 96px; }
+@media (max-width: 720px) {
+  .topbar .brand { min-width: 0; flex: 1 1 auto; overflow: hidden; }
+  .topbar .brand b { display: block; overflow: hidden; text-overflow: ellipsis; }
+}

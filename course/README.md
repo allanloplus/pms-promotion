@@ -58,6 +58,6 @@ python3 tools/prep_shots.py <截圖資料夾>
 更換畫面後，請一併確認 `content-*.js` 中的標註點位置。
 
 ---
-教材規劃製作：Allan Lo 顧問（http://www.123hi.org）　系統開發：米數Medsig（https://www.medsigtw.com/）
+教材規劃製作／系統開發：米數Medsig（https://www.medsigtw.com/）
 
 Copyright © 2026 Allan Lo. All rights reserved.

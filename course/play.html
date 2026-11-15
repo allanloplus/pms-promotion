@@ -15,6 +15,7 @@
 <body>
 <header class="topbar">
   <a class="brand" href="index.html"><b>米數Medsig 影音課程</b><span>以ISMS為基礎的專案安全管理系統 · Allan Lo</span></a>
+<nav class="partnav" aria-label="課程三大部分"><a href="index.html#part1" data-part="1"><b>①</b>系統特色</a><a href="index.html#part2" data-part="2"><b>②</b>合規對應</a><a href="index.html#part3" data-part="3"><b>③</b>系統操作</a></nav>
   <div class="grow"></div>
   <a class="btn small" href="index.html" id="readLink">互動教材版</a>
   <a class="btn small primary" href="index.html#quiz" id="quizLink">課後測驗</a>
@@ -24,6 +25,10 @@
     <div class="play-head">
       <div><div class="eyebrow" id="chapEyebrow">單元</div><h1 id="chapTitle">載入中…</h1></div>
       <span class="note" id="chapSub"></span>
+    </div>
+    <div class="chap-bar" aria-label="選擇章節">
+      <div class="part-tabs" id="partTabs" role="tablist"></div>
+      <label class="chap-pick"><span>單元</span><select id="chapSelect" aria-label="選擇單元"></select></label>
     </div>
 
     <section class="stage" id="stage" aria-label="動畫教室">
@@ -68,12 +73,12 @@
 
     <div class="lower">
       <section class="panel"><h2>本章字幕稿</h2><div class="transcript" id="transcript"></div></section>
-      <section class="panel"><h2>選擇章節</h2><div class="chap-list" id="chapList"></div></section>
+      <section class="panel"><h2>全部單元</h2><div class="chap-list" id="chapList"></div></section>
     </div>
   </div>
 </main>
 <footer class="site-foot">
-  <p>教材規劃製作：Allan Lo 顧問（<a href="http://www.123hi.org" target="_blank" rel="noopener">http://www.123hi.org</a>）　系統開發：<a href="https://www.medsigtw.com/" target="_blank" rel="noopener">米數Medsig</a>　技術支援：isms@medsigtw.com</p>
+  <p>教材規劃製作／系統開發：<a href="https://www.medsigtw.com/" target="_blank" rel="noopener">米數Medsig</a>　技術支援：isms@medsigtw.com</p>
   <p>系統畫面取自米數Medsig 示範環境，人名與資料皆為示範資料。Copyright © 2026 Allan Lo. All rights reserved.</p>
 </footer>
 
