@@ -92,24 +92,31 @@
       pts: ["研發專案：車載 T-Box（須風險評鑑）", "資訊專案：EDMS 系統建置（須風險評鑑）", "流程再造專案：P2P（免風險評鑑的代表案例）", "登入、角色權限與日常操作"] }
   ];
   function partsHTML() {
-    var cards = PARTS.map(function (P) {
+    var cards = PARTS.map(function (P, i) {
       var cs = COURSE.filter(function (c) { return c.part.indexOf(P.key) === 0; });
       var mins = cs.reduce(function (s, c) { return s + c.mins; }, 0);
       var done = cs.filter(function (c) { return state.done[c.id]; }).length;
-      return '<article class="part-card"><div class="part-no">' + P.icon + '</div><div class="part-body">' +
-        '<div class="eyebrow">' + P.key + " · " + cs.length + " 單元 · 約 " + mins + " 分鐘" + (done ? " · 已讀 " + done + "/" + cs.length : "") + "</div>" +
-        "<h3>" + P.name + "</h3><p>" + P.desc + "</p><ul>" + P.pts.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>" +
-        '<button class="btn small primary" data-go="c-' + cs[0].id + '">從' + P.key + "開始 →</button></div></article>";
+      return '<article class="part-card p' + (i + 1) + '">' +
+        '<header><span class="part-no">0' + (i + 1) + '</span><span class="part-key">' + P.key + "</span></header>" +
+        "<h3>" + P.name + "</h3>" +
+        '<div class="part-meta"><span>' + cs.length + " 個單元</span><span>約 " + mins + " 分鐘</span>" + (done ? "<span>已讀 " + done + "／" + cs.length + "</span>" : "") + "</div>" +
+        '<p class="part-desc">' + P.desc + "</p>" +
+        '<ul class="part-list">' + P.pts.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>" +
+        '<button class="btn primary part-go" data-go="c-' + cs[0].id + '">從' + P.key + "開始 →</button></article>";
     }).join("");
-    return '<section class="parts" aria-labelledby="partsTitle"><div class="parts-head"><div><div class="eyebrow">課程地圖</div>' +
-      '<h2 id="partsTitle">本課程分為三大部分</h2></div><p class="note">開場導覽 → 三大部分 → 結語與課後測驗，可依需要直接從任一部分開始。</p></div>' +
+    var notes = [
+      ["📖", "兩種版本", "互動教材版可自由跳讀、點圖放大；影音版由 Allan 與阿拉蕾語音導讀，約 1.6 小時。"],
+      ["📝", "課後測驗", "題庫隨機抽 " + DRAW + " 題，" + QUIZ.passScore + " 分以上通過；未通過可重讀後再測。"],
+      ["🏅", "通過證書", "通過後填寫資料，即可下載講師簽名的通過證書與題目解答。"],
+      ["🔒", "資料保護", "系統畫面為示範資料；閱讀進度與證書資料只存在您的瀏覽器。"]
+    ];
+    return '<section class="parts" aria-labelledby="partsTitle">' +
+      '<div class="parts-head"><div class="eyebrow">課程地圖</div><h2 id="partsTitle">本課程分為三大部分</h2>' +
+      '<p>開場導覽 → <b>系統特色</b> → <b>合規對應</b> → <b>系統操作</b> → 結語與課後測驗。可依需要直接從任一部分開始。</p></div>' +
       '<div class="parts-grid">' + cards + "</div>" +
-      '<div class="notice-box"><b>上課須知</b><ul>' +
-      "<li><b>兩種版本</b>：線上互動教材版（本頁，可自由跳讀、點圖放大）；線上課程教學影音版（Allan 顧問與 AI 小助手阿拉蕾語音導讀，約 1.6 小時）。</li>" +
-      "<li><b>課後測驗</b>：題庫隨機抽 " + DRAW + " 題，" + QUIZ.passScore + " 分以上通過，可下載講師簽名的通過證書；未通過可重讀後再測。</li>" +
-      "<li><b>系統畫面</b>：皆取自米數Medsig 系統示範環境，人名與資料為示範資料。</li>" +
-      "<li><b>個人資料</b>：閱讀進度與證書資料只存在您的瀏覽器，不會上傳。</li>" +
-      "</ul></div></section>";
+      '<div class="notes-grid" aria-label="上課須知">' + notes.map(function (n) {
+        return '<div class="note-tile"><span class="ni" aria-hidden="true">' + n[0] + "</span><div><b>" + n[1] + "</b><p>" + n[2] + "</p></div></div>";
+      }).join("") + "</div></section>";
   }
 
   function renderHome() {
@@ -121,7 +128,7 @@
         "<h3>" + esc(c.title) + "</h3><p>" + esc(c.sub) + "</p></button>";
     }).join("");
     $main.innerHTML =
-      '<div class="wrap">' + partsHTML() +
+      '<div class="wrap wide">' + partsHTML() +
       '<section class="hero">' +
       '<figure class="who" style="margin:0"><figcaption>講師 Allan Lo</figcaption><img src="' + IMG.A + '" alt="Allan 講師半身像" width="220"></figure>' +
       '<div class="copy"><div class="eyebrow">ISO 27001 · TISAX · ISO 27701 · ISO 42001 · IEC 62443 · ISO/SAE 21434</div>' +
