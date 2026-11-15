@@ -79,6 +79,39 @@
   window.addEventListener("hashchange", route_);
 
   /* ---------- 首頁 ---------- */
+  /* 首頁開頭：課程三大部分與上課須知 */
+  var PARTS = [
+    { key: "第一部分", name: "系統特色介紹", icon: "①",
+      desc: "為什麼這是一套和傳統 PMS 不一樣、<b>以 ISMS 為基礎</b>的專案管理系統；透過實際系統畫面，說明專案管理與稽核的實踐方法。",
+      pts: ["傳統 PMS 與米數Medsig 的差異", "專案性質、分類與五階段管控", "重要性評估、風險評鑑、安全要求與稽核", "管理總覽、報表、職務區隔與稽核軌跡"] },
+    { key: "第二部分", name: "與資安標準的合規對應", icon: "②",
+      desc: "系統如何連結 <b>ISO 27001、TISAX、ISO 27701、ISO 42001、IEC 62443、ISO/SAE 21434</b>，提供安全專案管理的實踐與稽核佐證。",
+      pts: ["條文 → 系統功能 → 稽核佐證對應", "TISAX 專案資安與原型保護", "個資（PIA）與 AI 衝擊評估", "產品網路安全（TARA、SBOM）與稽核佐證地圖"] },
+    { key: "第三部分", name: "系統操作介紹", icon: "③",
+      desc: "以實際操作畫面示範三個案例，<b>從專案建立、過程到結案</b>如何在系統上實現。",
+      pts: ["研發專案：車載 T-Box（須風險評鑑）", "資訊專案：EDMS 系統建置（須風險評鑑）", "流程再造專案：P2P（免風險評鑑的代表案例）", "登入、角色權限與日常操作"] }
+  ];
+  function partsHTML() {
+    var cards = PARTS.map(function (P) {
+      var cs = COURSE.filter(function (c) { return c.part.indexOf(P.key) === 0; });
+      var mins = cs.reduce(function (s, c) { return s + c.mins; }, 0);
+      var done = cs.filter(function (c) { return state.done[c.id]; }).length;
+      return '<article class="part-card"><div class="part-no">' + P.icon + '</div><div class="part-body">' +
+        '<div class="eyebrow">' + P.key + " · " + cs.length + " 單元 · 約 " + mins + " 分鐘" + (done ? " · 已讀 " + done + "/" + cs.length : "") + "</div>" +
+        "<h3>" + P.name + "</h3><p>" + P.desc + "</p><ul>" + P.pts.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>" +
+        '<button class="btn small primary" data-go="c-' + cs[0].id + '">從' + P.key + "開始 →</button></div></article>";
+    }).join("");
+    return '<section class="parts" aria-labelledby="partsTitle"><div class="parts-head"><div><div class="eyebrow">課程地圖</div>' +
+      '<h2 id="partsTitle">本課程分為三大部分</h2></div><p class="note">開場導覽 → 三大部分 → 結語與課後測驗，可依需要直接從任一部分開始。</p></div>' +
+      '<div class="parts-grid">' + cards + "</div>" +
+      '<div class="notice-box"><b>上課須知</b><ul>' +
+      "<li><b>兩種版本</b>：線上互動教材版（本頁，可自由跳讀、點圖放大）；線上課程教學影音版（Allan 顧問與 AI 小助手阿拉蕾語音導讀，約 1.6 小時）。</li>" +
+      "<li><b>課後測驗</b>：題庫隨機抽 " + DRAW + " 題，" + QUIZ.passScore + " 分以上通過，可下載講師簽名的通過證書；未通過可重讀後再測。</li>" +
+      "<li><b>系統畫面</b>：皆取自米數Medsig 系統示範環境，人名與資料為示範資料。</li>" +
+      "<li><b>個人資料</b>：閱讀進度與證書資料只存在您的瀏覽器，不會上傳。</li>" +
+      "</ul></div></section>";
+  }
+
   function renderHome() {
     renderSide("home");
     var next = COURSE.filter(function (c) { return !state.done[c.id]; })[0] || COURSE[0];
@@ -88,7 +121,7 @@
         "<h3>" + esc(c.title) + "</h3><p>" + esc(c.sub) + "</p></button>";
     }).join("");
     $main.innerHTML =
-      '<div class="wrap">' +
+      '<div class="wrap">' + partsHTML() +
       '<section class="hero">' +
       '<figure class="who" style="margin:0"><figcaption>講師 Allan Lo</figcaption><img src="' + IMG.A + '" alt="Allan 講師半身像" width="220"></figure>' +
       '<div class="copy"><div class="eyebrow">ISO 27001 · TISAX · ISO 27701 · ISO 42001 · IEC 62443 · ISO/SAE 21434</div>' +
