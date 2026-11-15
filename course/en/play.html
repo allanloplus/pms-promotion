@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Medsig PMS Video Course</title>
+<meta name="description" content="Video version of the Medsig project security management course: narrated by consultant Allan and AI assistant Arale, with system screens that zoom to each point, plus quick checks.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@700;900&family=LXGW+WenKai+TC&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/play.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="index.html"><b>Medsig PMS Video Course</b><span>ISMS-based project security management · Allan Lo</span></a>
+<nav class="partnav" aria-label="Three course parts"><a href="index.html#part1" data-part="1"><b>①</b>Features</a><a href="index.html#part2" data-part="2"><b>②</b>Compliance</a><a href="index.html#part3" data-part="3"><b>③</b>Operation</a></nav>
+  <div class="grow"></div>
+  <a class="btn small langlink" href="../play.html" hreflang="zh-Hant" lang="zh-Hant">中文</a>
+  <a class="btn small" href="index.html" id="readLink">Interactive</a>
+  <a class="btn small primary" href="index.html#quiz" id="quizLink">Final quiz</a>
+</header>
+<main class="play-main">
+  <div class="play-wrap">
+    <div class="play-head">
+      <div><div class="eyebrow" id="chapEyebrow">Unit</div><h1 id="chapTitle">Loading…</h1></div>
+      <span class="note" id="chapSub"></span>
+    </div>
+    <div class="chap-bar" aria-label="Units">
+      <div class="part-tabs" id="partTabs" role="tablist"></div>
+      <label class="chap-pick"><span>Unit</span><select id="chapSelect" aria-label="Choose a unit"></select></label>
+    </div>
+
+    <section class="stage" id="stage" aria-label="Animated classroom">
+      <div class="actor A quiet" id="actorA">
+        <span class="name">Consultant Allan</span>
+        <div class="frame"><img src="../assets/allan.webp" alt="Allan Instructor" width="560" height="651"></div>
+        <div class="mood" id="moodA" hidden><img alt=""></div>
+        <div class="waves" aria-hidden="true"><i></i><i></i><i></i></div>
+      </div>
+      <div class="board" id="board" aria-live="polite"></div>
+      <div class="actor R quiet" id="actorR">
+        <span class="name">AI assistant Arale</span>
+        <div class="frame"><img src="../assets/arale.webp" alt="AI assistant Arale" width="440" height="623"></div>
+        <div class="mood" id="moodR" hidden><img alt=""></div>
+        <div class="waves" aria-hidden="true"><i></i><i></i><i></i></div>
+      </div>
+      <div class="bubble-zone"><div class="speech A" id="speech"><span class="who" id="speechWho">Arale</span><span class="txt" id="speechTxt"></span></div></div>
+      <div class="cover" id="cover">
+        <h2 id="coverTitle">Ready to start?</h2>
+        <p id="coverText">Allan and AI assistant Arale will guide you step by step through the Medsig project security management system with real screens. Turn on your speakers or put on headphones.</p>
+        <button class="big-play" id="coverPlay" aria-label="Start">▶</button>
+      </div>
+    </section>
+
+    <section class="controls" aria-label="Playback controls">
+      <div class="timeline" id="timeline" role="slider" aria-label="Progress" tabindex="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <div class="track"></div><div class="fill" id="tlFill"></div><div id="tlTicks"></div><div class="knob" id="tlKnob"></div>
+      </div>
+      <div class="ctl-row">
+        <button class="ctl" id="btnPrev" title="Previous (←)" aria-label="Previous">⏮</button>
+        <button class="ctl play" id="btnPlay" title="Play/Pause (Space)" aria-label="Play">▶</button>
+        <button class="ctl" id="btnNext" title="Next (→)" aria-label="Next">⏭</button>
+        <span class="time" id="timeText">0:00 / 0:00</span>
+        <span class="grow"></span>
+        <label class="hide-sm note" for="speed">Speed</label>
+        <select id="speed" aria-label="Speed"><option value="0.8">0.8×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option><option value="1.75">1.75×</option></select>
+        <button class="ctl on" id="btnSub" aria-pressed="true" title="Subtitles">Subtitles</button>
+        <button class="ctl on" id="btnAuto" aria-pressed="true" title="Autoplay next unit">Autoplay</button>
+      </div>
+      <p class="mode-note" id="modeNote"></p>
+    </section>
+
+    <div class="lower">
+      <section class="panel"><h2>Transcript</h2><div class="transcript" id="transcript"></div></section>
+      <section class="panel"><h2>All units</h2><div class="chap-list" id="chapList"></div></section>
+    </div>
+  </div>
+</main>
+<footer class="site-foot">
+  <p>Course design / System development: <a href="https://www.medsigtw.com/" target="_blank" rel="noopener">Medsig</a> · Support: isms@medsigtw.com</p>
+  <p>Screens are from the Medsig demo environment; names and data are fictitious. Copyright © 2026 Allan Lo. All rights reserved.</p>
+</footer>
+
+<script src="js/characters.js"></script>
+<script src="js/content-1.js"></script>
+<script src="js/content-2.js"></script>
+<script src="js/content-3.js"></script>
+<script src="js/play-script.js"></script>
+<script src="audio/cues.js"></script>
+<script src="js/play.js"></script>
+</body>
+</html>
