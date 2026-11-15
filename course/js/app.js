@@ -90,7 +90,7 @@
     $main.innerHTML =
       '<div class="wrap">' +
       '<section class="hero">' +
-      '<figure class="who" style="margin:0"><figcaption>講師 Allan Lo 羅宇倫</figcaption><img src="' + IMG.A + '" alt="Allan 講師半身像" width="220"></figure>' +
+      '<figure class="who" style="margin:0"><figcaption>講師 Allan Lo</figcaption><img src="' + IMG.A + '" alt="Allan 講師半身像" width="220"></figure>' +
       '<div class="copy"><div class="eyebrow">ISO 27001 · TISAX · ISO 27701 · ISO 42001 · IEC 62443 · ISO/SAE 21434</div>' +
       "<h1>米數Medsig<br>專案安全管理系統<br>線上課程</h1>" +
       "<p>不只是專案管理：一套以 ISMS 為基礎、把資安要求內建在專案五階段的 PMS。Allan 顧問用實際系統畫面，帶你從特色、合規對應到研發、資訊與一般專案的完整操作；AI 小助手阿拉蕾幫你把重點問清楚。</p>" +
@@ -355,7 +355,7 @@
     var cv = document.createElement("canvas"); cv.width = W; cv.height = H;
     var g = cv.getContext("2d");
     var info = P.info;
-    var text = "通過證書CertificateofAchievement米數Medsig茲證明貴單位職稱完成課程並通過課後測驗特此證明講師顧問證書編號日期成績分" + COURSE_TITLE + info.company + info.dept + info.name + info.title + "0123456789年月日AllanLo羅宇倫ISMS資訊安全管理系統通過";
+    var text = "通過證書CertificateofAchievement米數Medsig茲證明貴單位職稱完成課程並通過課後測驗特此證明講師顧問證書編號日期成績分" + COURSE_TITLE + info.company + info.dept + info.name + info.title + "0123456789年月日AllanLoISMS資訊安全管理系統通過";
     var fontsReady = document.fonts && document.fonts.load ? Promise.all([
       document.fonts.load('900 60px "Noto Serif TC"', text),
       document.fonts.load('700 30px "Noto Sans TC"', text),
@@ -431,10 +431,10 @@
         var sw = 230, sh = sw * imSig.height / imSig.width;
         g.drawImage(imSig, 1090 - sw / 2, 953 - sh, sw, sh);
       } else {
-        g.font = "400 46px " + HAND; g.fillStyle = INK; g.fillText("Allan Lo 羅宇倫", 1090, 930);
+        g.font = "400 46px " + HAND; g.fillStyle = INK; g.fillText("Allan Lo", 1090, 930);
       }
       g.strokeStyle = INK; g.lineWidth = 1.5; g.beginPath(); g.moveTo(950, 945); g.lineTo(1230, 945); g.stroke();
-      g.font = "500 24px " + SANS; g.fillStyle = INK; g.fillText("Allan Lo 羅宇倫", 1090, 985);
+      g.font = "500 24px " + SANS; g.fillStyle = INK; g.fillText("Allan Lo", 1090, 985);
       g.font = "400 21px " + SANS; g.fillStyle = "#5a6170"; g.fillText("授課講師 / ISMS・PIMS 輔導顧問", 1090, 1014);
 
       // 印章
