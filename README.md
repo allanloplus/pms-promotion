@@ -6,6 +6,7 @@
 - `img/`：系統畫面截圖（取自示範資料）
 - `favicon.svg`：網站圖示
 - `course/`：系統線上課程（動畫教學）：線上互動教材版 `course/index.html`、線上課程教學影音版 `course/play.html`、課後測驗與通過證書。說明見 [`course/README.md`](course/README.md)
+- `xbom/`：XBOM 對話教學（Allan 顧問與 AI 小助理阿拉蕾）：單一頁面 `xbom/index.html`，角色圖內嵌；`xbom/share.png` 為 Facebook／LINE 分享縮圖（1200×630）
 
 ## 發佈
 
