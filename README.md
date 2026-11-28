@@ -9,7 +9,7 @@
 - `xbom/`：XBOM 對話教學（Allan 顧問與 AI 小助理阿拉蕾）：單一頁面 `xbom/index.html`，角色圖內嵌；`xbom/share.png` 為 Facebook／LINE 分享縮圖（1200×630）
 - `security-testing/`：安全檢測對話教學（XBOM 的續篇，去識別化公開版）：單一頁面 `security-testing/index.html`；`security-testing/share.png` 為分享縮圖
 - `third-party-report/`：解讀第三方檢測報告（系列第三篇；報告節錄皆為虛構）：`third-party-report/index.html` 與分享縮圖 `share.png`
-- `development/`：AI 協作開發對話教學（安全檢測案例的上集，去識別化公開版；示意圖皆為重繪）：單一頁面 `development/index.html` 與分享縮圖 `share.png`
+- `development/`：AI 協作開發過程紀錄－以專案管理系統開發個案為例（安全檢測案例的上集，去識別化公開版；示意圖皆為重繪）：單一頁面 `development/index.html` 與分享縮圖 `share.png`
 
 ## 發佈
 
