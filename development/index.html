@@ -314,6 +314,30 @@ ol.steps.inc li.bad { border-top: 3px solid var(--crit); } ol.steps.inc li.good 
 .src .outs div { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 3px; padding: 10px 12px; display: grid; gap: 2px; }
 .src .outs span { font-size: .86rem; color: var(--muted); line-height: 1.5; }
 .series .up b { color: var(--accent); }
+.mm { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 16px 18px; display: grid; gap: 16px; min-width: 0; }
+.mm-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; align-items: baseline; border-bottom: 1px solid var(--line); padding-bottom: 10px; }
+.mm-head b { font-size: 1.1rem; color: var(--accent); } .mm-head span { font-family: var(--mono); font-size: .78rem; color: var(--muted); }
+.mm-part { display: grid; gap: 8px; }
+.mm-lb { font-family: var(--mono); font-size: .74rem; letter-spacing: .05em; color: var(--muted); }
+.mm-cats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; align-items: start; }
+@media (max-width: 860px) { .mm-cats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 480px) { .mm-cats { grid-template-columns: minmax(0, 1fr); } }
+.mm-cat { background: var(--warn-soft); border-radius: 4px; padding: 8px 10px; display: grid; gap: 4px; min-width: 0; }
+.mm-cat b { font-size: .93rem; font-weight: 600; }
+.mm-cat.hot { outline: 2px solid var(--warn); }
+.mm-cat ul { font-size: .8rem; line-height: 1.45; color: var(--muted); gap: 2px; padding-left: 1.1em; }
+.mm-flow, .mm-b { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: .88rem; }
+.mm i { font-style: normal; font-family: var(--mono); color: var(--muted); }
+.mm .n { background: var(--code-bg); border: 1px solid var(--line); border-radius: 3px; padding: 3px 9px; display: grid; }
+.mm .n.key { border-color: var(--accent); color: var(--accent); font-weight: 600; }
+.mm .n small { font-size: .74rem; color: var(--muted); }
+.mm-br { display: grid; gap: 6px; padding-left: 14px; border-left: 2px solid var(--line); margin-left: 10px; }
+.mm .g { font-weight: 600; font-size: .84rem; padding: 3px 8px; border-radius: 99px; }
+.mm-b.lo .g { background: var(--ok-soft); color: var(--ok); } .mm-b.hi .g { background: var(--crit-soft); color: var(--crit); }
+.mm-ph { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; }
+@media (max-width: 720px) { .mm-ph { grid-template-columns: minmax(0, 1fr); } }
+.mm-ph div { background: var(--accent); color: var(--surface); border-radius: 4px; padding: 8px 10px; display: grid; gap: 2px; align-content: start; }
+.mm-ph b { font-size: .95rem; } .mm-ph small { font-size: .76rem; opacity: .9; line-height: 1.45; }
 .figs { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
 .figs b { font-size: 1.5rem; }
 @media (max-width: 760px) { .dims, .src { grid-template-columns: minmax(0, 1fr); } .dims .x, .src .x { transform: rotate(90deg); } }
@@ -355,11 +379,34 @@ ol.steps.inc li.bad { border-top: 3px solid var(--crit); } ol.steps.inc li.good 
 <div class="band"><span class="bt">PART 1</span><h2>第一部　從想法到上線</h2><p>11/11 下午到 11/13 傍晚：需求、試跑、評估、補強、部署，直到系統正式上線。</p></div>
 
 <section id="ch01"><div class="tag">01 · NEED</div><div class="body"><h2>一張心智圖加一段話</h2>
-<div class="scene"><span class="when">2026-11-11 16:48</span><p>Allan 傳來一張心智圖：上半部是企業專案的八大類別，下半部是專案的安全流程。圖下面附了一段需求。</p></div>
+<div class="scene"><span class="when">2026-11-11 16:48</span><p>Allan 傳來一張心智圖：他在 2023 年畫的〈專案安全要求關聯圖〉。上半部是企業專案的八大類別，下半部是專案的安全流程與五階段。圖下面附了一段需求。</p></div>
+<figure class="mm" aria-label="專案安全要求關聯圖（重繪）"><div class="mm-head"><b>專案安全要求關聯圖</b><span>原圖 Allan Lo 製作，2023/10/14</span></div>
+<div class="mm-part"><span class="mm-lb">上半部 · 專案性質及分類（八大類別）</span>
+<div class="mm-cats">
+<div class="mm-cat"><b>1 策略專案</b></div>
+<div class="mm-cat"><b>2 資本投資專案</b></div>
+<div class="mm-cat hot"><b>3 產品開發專案</b><ul><li>Support Projects（支援性產品專案）</li><li>Derivate Projects（衍生性產品專案）</li><li>Build to Print Projects（OEM 開發專案）</li><li>Build to Spec. Projects（ODM 開發專案）</li><li>R&amp;D Projects（自主研發專案）</li><li>Strategic Projects（策略性專案）</li></ul></div>
+<div class="mm-cat hot"><b>4 資訊專案</b><ul><li>顧問訓練類</li><li>系統發展類</li><li>維運管理類</li><li>雲端服務類</li></ul></div>
+<div class="mm-cat"><b>5 企業流程再造專案</b></div>
+<div class="mm-cat"><b>6 設施整修專案</b></div>
+<div class="mm-cat"><b>7 問題解決專案</b></div>
+<div class="mm-cat"><b>8 作業相關專案</b></div>
+</div></div>
+<div class="mm-part"><span class="mm-lb">下半部 · 專案安全流程</span>
+<div class="mm-flow"><span class="n">專案成員、角色與權限</span><i>→</i><span class="n">專案基本資料</span><i>→</i><span class="n">專案性質及分類</span><i>→</i><span class="n key">專案安全重要性評估</span></div>
+<div class="mm-br">
+<div class="mm-b lo"><span class="g">普／中（1 及 2）</span><i>→</i><span class="n">結束</span></div>
+<div class="mm-b hi"><span class="g">高／非常高（3 及 4）</span><i>→</i><span class="n key">專案安全風險評鑑</span><i>→</i><span class="n key">設定安全要求事項</span><i>→</i><span class="n">一般／中級／高級管制<small>管理控制 · 技術控制 · 實體控制</small></span><i>→</i><span class="n">專案文件機密等級分類執行</span></div>
+</div></div>
+<div class="mm-part"><span class="mm-lb">五階段，以及與流程的連結</span>
+<div class="mm-ph"><div><b>專案起始</b><small>← 專案基本資料</small></div><div><b>專案規劃</b></div><div><b>專案執行</b><small>↔ 異動管理及持續風險評鑑（回到重要性評估）</small></div><div><b>專案監控</b><small>← 專案安全監督及稽核（回到安全要求事項）</small></div><div><b>專案結束</b></div></div>
+</div></figure>
+<p class="figcap">Allan 附在第一句需求的心智圖（依原圖重繪，保留全部節點與連結；原圖為繪圖軟體畫面）。橘色框是需求中指定須做風險評鑑的兩類專案。</p>
+
 <p class="quote">「我要建置一個專案管理系統，如圖架構：圖示上半部是企業完整專案的分類，請依不同的專案類型建立專案五階段不同的專案管控內容；產品開發專案和資訊專案，因為 ISMS 及 TISAX 的標準要求，必須實施專案的風險評鑑，請設計風險評鑑的方法及管控的要求……成員帳號以 e-mail 為主，不採密碼設定，改採由 mail 發送的驗證碼登入；請建立完整的機制及權限，包含工作指派；需有個別及整體的專案進度管控、成本與效率分析；電腦與手機皆可使用。」<span class="cite">需求最後並列出要對應的標準：ISO 27001／TISAX、ISO 27701、ISO 42001、IEC 62443、ISO/SAE 21434。</span></p>
-<div class="talk"><div class="say allan"><div class="av al-talk" role="img" aria-label="Allan 顧問"></div><div class="bubble"><span class="who">Allan 顧問</span><p>這段話不是規格書，也沒指定任何技術。你從哪裡開始？</p></div></div><div class="say bot"><div class="av ar-explain" role="img" aria-label="阿拉蕾"></div><div class="bubble"><span class="who">阿拉蕾</span><p>從您講得最清楚的地方開始：要管什麼、依據什麼。「產品開發與資訊專案要做風險評鑑」「五階段的管控內容依類型不同」「用驗證碼登入、不設密碼」，這些就是系統的骨架。</p></div></div><div class="say allan"><div class="av al-think" role="img" aria-label="Allan 顧問"></div><div class="bubble"><span class="who">Allan 顧問</span><p>技術呢？我完全沒提。</p></div></div><div class="say bot"><div class="av ar-explain" role="img" aria-label="阿拉蕾"></div><div class="bubble"><span class="who">阿拉蕾</span><p>我刻意選了保守的組合：Node.js、單一檔案的資料庫、不需要建置步驟的前端。您不是開發人員，系統要能「下載就能跑」，日後也要好維護。新潮的框架對您沒有好處。</p></div></div><div class="say allan"><div class="av al-point" role="img" aria-label="Allan 顧問"></div><div class="bubble"><span class="who">Allan 顧問</span><p>標準的要求，怎麼變成系統？</p></div></div><div class="say bot"><div class="av ar-explain" role="img" aria-label="阿拉蕾"></div><div class="bubble"><span class="who">阿拉蕾</span><p>轉成一條可以執行的流程，就是下面這五步。最重要的是最後一步：階段審查的項目由系統依實際紀錄自動判定，不能手動打勾。</p></div></div><div class="say allan"><div class="av al-laugh" role="img" aria-label="Allan 顧問"></div><div class="bubble"><span class="who">Allan 顧問</span><p>這個我喜歡。稽核時最怕的就是「勾了，但沒有紀錄」。</p></div></div><div class="say bot"><div class="av ar-thumb" role="img" aria-label="阿拉蕾"></div><div class="bubble"><span class="who">阿拉蕾</span><p>第一版我也同時寫了端到端測試，之後每次修改都重跑一次。大約 30 分鐘後，第一版可以執行。</p></div></div></div>
+<div class="talk"><div class="say allan"><div class="av al-talk" role="img" aria-label="Allan 顧問"></div><div class="bubble"><span class="who">Allan 顧問</span><p>這張圖是我 2023 年就畫好的，這段話也不是規格書，沒指定任何技術。你從哪裡開始？</p></div></div><div class="say bot"><div class="av ar-explain" role="img" aria-label="阿拉蕾"></div><div class="bubble"><span class="who">阿拉蕾</span><p>從您講得最清楚的地方開始：要管什麼、依據什麼。圖已經把骨架畫好了：八大類別、重要性評估分成兩條路、管制分三級、五階段各自連到異動管理與監督稽核。「產品開發與資訊專案要做風險評鑑」「五階段的管控內容依類型不同」「用驗證碼登入、不設密碼」，這些就是系統的骨架。</p></div></div><div class="say allan"><div class="av al-think" role="img" aria-label="Allan 顧問"></div><div class="bubble"><span class="who">Allan 顧問</span><p>技術呢？我完全沒提。</p></div></div><div class="say bot"><div class="av ar-explain" role="img" aria-label="阿拉蕾"></div><div class="bubble"><span class="who">阿拉蕾</span><p>我刻意選了保守的組合：Node.js、單一檔案的資料庫、不需要建置步驟的前端。您不是開發人員，系統要能「下載就能跑」，日後也要好維護。新潮的框架對您沒有好處。</p></div></div><div class="say allan"><div class="av al-point" role="img" aria-label="Allan 顧問"></div><div class="bubble"><span class="who">Allan 顧問</span><p>標準的要求，怎麼變成系統？</p></div></div><div class="say bot"><div class="av ar-explain" role="img" aria-label="阿拉蕾"></div><div class="bubble"><span class="who">阿拉蕾</span><p>轉成一條可以執行的流程，就是下面這五步。最重要的是最後一步：階段審查的項目由系統依實際紀錄自動判定，不能手動打勾。</p></div></div><div class="say allan"><div class="av al-laugh" role="img" aria-label="Allan 顧問"></div><div class="bubble"><span class="who">Allan 顧問</span><p>這個我喜歡。稽核時最怕的就是「勾了，但沒有紀錄」。</p></div></div><div class="say bot"><div class="av ar-thumb" role="img" aria-label="阿拉蕾"></div><div class="bubble"><span class="who">阿拉蕾</span><p>第一版我也同時寫了端到端測試，之後每次修改都重跑一次。大約 30 分鐘後，第一版可以執行。</p></div></div></div>
 <ol class="steps flow5"><li><b>重要性評估</b><span>9 個構面分別評分，取最高者作為專案的重要性等級</span></li><li><b>是否做風險評鑑</b><span>等級 3、4 的專案必須實施專案風險評鑑</span></li><li><b>套用管制</b><span>依等級套用一般、中級或高級管制</span></li><li><b>文件分級</b><span>專案文件依等級分級</span></li><li class="think"><b>階段審查</b><span>五階段的審查項目由系統依實際紀錄自動判定，不能手動勾選</span></li></ol>
-<p class="figcap">標準要求轉成的判定流程（依開發紀錄重繪）。同一張心智圖上的八大類別，各自帶出五階段不同的管控內容。</p>
+<p class="figcap">心智圖與需求轉成的判定流程（依開發紀錄整理）。八大類別各自帶出五階段不同的管控內容。</p>
 <div class="learn"><span class="lb">這一段學到什麼</span><p>需求不必寫成規格書。領域專家把「要管什麼、依據哪個標準」講清楚，比指定技術重要；心智圖這類圖像也可以直接當作輸入。技術選型要配合使用者的能力，「好維護」比「新」重要。</p></div>
 <div class="check"><span class="lb">可帶走的檢核點</span><ul><li>我能用一句話說出這套系統要管什麼、給誰用</li><li>每一條要求都能指出依據：哪個標準、哪個內部規定</li><li>哪些判斷由系統依紀錄自動決定、哪些可以由人勾選，我已經想過</li><li>不能讓 AI 自行決定的條件（例如不設密碼、手機可用），我寫進第一段需求了</li><li>要求 AI 從第一版起就附上自動測試</li></ul></div>
 </div></section>
@@ -428,7 +475,7 @@ ol.steps.inc li.bad { border-top: 3px solid var(--crit); } ol.steps.inc li.good 
 </div></section>
 
 <section id="ch07"><div class="tag">07 · DOMAIN</div><div class="body"><h2>補上領域模型：專案性質、委外與多公司</h2>
-<div class="scene"><span class="when">2026-11-13 06:33～07:22</span><p>一早，Allan 想起一個最核心的概念還沒講。</p></div>
+<div class="scene"><span class="when">2026-11-13 06:33～07:22</span><p>一早，Allan 想起一個最核心的概念還沒講。回頭看第 01 章的心智圖，上面有八大類別，卻沒有「內部、外部、客戶」這個維度。</p></div>
 <p class="quote">「忘了專案的性質有 3 類，必須能建立：內部專案、外部專案、客戶專案……」</p>
 <div class="talk"><div class="say allan"><div class="av al-scratch" role="img" aria-label="Allan 顧問"></div><div class="bubble"><span class="who">Allan 顧問</span><p>這是最核心的概念，我卻忘了講。</p></div></div><div class="say bot"><div class="av ar-explain" role="img" aria-label="阿拉蕾"></div><div class="bubble"><span class="who">阿拉蕾</span><p>您接著貼上三種性質的定義、範例與管理重點，還指出兩件事：內部專案若有委外，例如廠商主導的採購、機密資料往來、維運合約，要對應 ISO 27001 與 TISAX 的供應商安全要求；客戶專案則是 TISAX 的重點。</p></div></div><div class="say allan"><div class="av al-think" role="img" aria-label="Allan 顧問"></div><div class="bubble"><span class="who">Allan 顧問</span><p>你怎麼放進已經寫好的系統？</p></div></div><div class="say bot"><div class="av ar-explain" role="img" aria-label="阿拉蕾"></div><div class="bubble"><span class="who">阿拉蕾</span><p>我把它做成兩個獨立的維度：專案性質一個，委外型態一個。兩者各自帶出管控項目與安全要求事項，供應商的是 SP-01～07，客戶合約的是 CU-01～06。</p></div></div></div>
 <div class="dims">
